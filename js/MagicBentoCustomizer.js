@@ -161,6 +161,7 @@ class MagicBentoCustomizer {
             <button class="color-preset" data-color="0, 255, 132" style="background: rgb(0, 255, 132)"></button>
             <button class="color-preset" data-color="255, 132, 0" style="background: rgb(255, 132, 0)"></button>
             <button class="color-preset" data-color="0, 132, 255" style="background: rgb(0, 132, 255)"></button>
+            <button class="color-preset" data-color="255, 0, 0" style="background: rgba(247, 245, 245, 1)"></button>
           </div>
         </div>
         

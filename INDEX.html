@@ -1,0 +1,492 @@
+1   ض46تِ<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاضرة البرمجة وهندسة البرمجيات | Programming & Software Engineering Lecture</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-code"></i>
+                <span data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#intro" data-ar="المقدمة" data-en="Introduction">المقدمة</a>
+                <a href="#programming" data-ar="البرمجة" data-en="Programming">البرمجة</a>
+                <a href="#software-eng" data-ar="هندسة البرمجيات" data-en="Software Engineering">هندسة البرمجيات</a>
+                <a href="#javascript" data-ar="جافا سكريبت" data-en="JavaScript">جافا سكريبت</a>
+                <a href="#frameworks" data-ar="الإطارات" data-en="Frameworks">الإطارات</a>
+                <a href="#css-advanced" data-ar="CSS المتقدم" data-en="Advanced CSS">CSS المتقدم</a>
+            </div>
+            <div class="language-toggle">
+                <button id="langToggle" class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Instructor Header -->
+    <section class="instructor-header">
+        <div class="container">
+            <div class="instructor-info">
+                <div class="instructor-avatar">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="instructor-details">
+                    <h1 class="instructor-name" data-ar="محاضرة قبول وظيفة العمل" data-en="Job Acceptance Lecture">محاضرة قبول وظيفة العمل</h1>
+                    <div class="instructor-title">
+                        <h2 data-ar="المحاضر: مهندس محمد سعود الرميحي" data-en="Instructor: Engineer Mohammed Saud Al-Rumaihi">المحاضر: مهندس محمد سعود الرميحي</h2>
+                    </div>
+                    <div class="instructor-credentials">
+                        <div class="credential-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span data-ar="مهندس برمجيات - السنة الثانية" data-en="Software Engineer - Second Year">مهندس برمجيات - السنة الثانية</span>
+                        </div>
+                        <div class="credential-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span data-ar="خريج الأمن السيبراني CCT" data-en="Cyber Security Graduate CCT">خريج الأمن السيبراني CCT</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Professional Expertise Section -->
+                    <div class="expertise-section">
+                        <h3 data-ar="الخبرات التقنية والتخصصات" data-en="Technical Expertise & Specializations">الخبرات التقنية والتخصصات</h3>
+                        
+                        <div class="expertise-grid">
+                            <div class="expertise-category">
+                                <div class="category-header">
+                                    <i class="fas fa-globe"></i>
+                                    <h4 data-ar="تطوير تطبيقات الويب" data-en="Web Development">تطوير تطبيقات الويب</h4>
+                                </div>
+                                <div class="tech-stack">
+                                    <span class="tech-item html">HTML</span>
+                                    <span class="tech-item css">CSS</span>
+                                    <span class="tech-item js">JavaScript</span>
+                                    <span class="tech-item react">React</span>
+                                    <span class="tech-item ts">TypeScript</span>
+                                </div>
+                            </div>
+                            
+                            <div class="expertise-category">
+                                <div class="category-header">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <h4 data-ar="تطوير التطبيقات المحمولة" data-en="Mobile Development">تطوير التطبيقات المحمولة</h4>
+                                </div>
+                                <div class="tech-stack">
+                                    <span class="tech-item dart">Dart</span>
+                                    <span class="tech-item flutter">Flutter</span>
+                                    <span class="tech-item native">Native Platforms</span>
+                                    <span class="tech-item mobile-apps">Mobile Apps</span>
+                                </div>
+                            </div>
+                            
+                            <div class="expertise-category">
+                                <div class="category-header">
+                                    <i class="fas fa-brain"></i>
+                                    <h4 data-ar="الذكاء الاصطناعي وعلم البيانات" data-en="AI & Data Science">الذكاء الاصطناعي وعلم البيانات</h4>
+                                </div>
+                                <div class="tech-stack">
+                                    <span class="tech-item python">Python</span>
+                                    <span class="tech-item pytorch">PyTorch</span>
+                                    <span class="tech-item neural">Neural Networks</span>
+                                    <span class="tech-item ml">Machine Learning</span>
+                                    <span class="tech-item fine-tuning">Fine-tuning</span>
+                                </div>
+                                <div class="experience-note">
+                                    <i class="fas fa-clock"></i>
+                                    <span data-ar="خبرة سنة ونصف في Python - وصولاً للمعادلات العصبية" data-en="1.5 years Python experience - Advanced to Neural Functions">خبرة سنة ونصف في Python - وصولاً للمعادلات العصبية</span>
+                                </div>
+                            </div>
+                            
+                            <div class="expertise-category">
+                                <div class="category-header">
+                                    <i class="fas fa-robot"></i>
+                                    <h4 data-ar="هندسة التلقين والذكاء الاصطناعي" data-en="Prompt Engineering & AI">هندسة التلقين والذكاء الاصطناعي</h4>
+                                </div>
+                                <div class="tech-stack">
+                                    <span class="tech-item prompt">Prompt Engineering</span>
+                                    <span class="tech-item ai-expert">AI Expert</span>
+                                    <span class="tech-item colab">Google Colab</span>
+                                    <span class="tech-item ml-fundamentals">ML Fundamentals</span>
+                                </div>
+                            </div>
+                            
+                            <div class="expertise-category">
+                                <div class="category-header">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <h4 data-ar="الأمن السيبراني وأنظمة التشغيل" data-en="Cybersecurity & Operating Systems">الأمن السيبراني وأنظمة التشغيل</h4>
+                                </div>
+                                <div class="tech-stack">
+                                    <span class="tech-item linux">Linux Expert</span>
+                                    <span class="tech-item powershell">PowerShell</span>
+                                    <span class="tech-item bash">Bash Scripting</span>
+                                    <span class="tech-item network-security">Network Security</span>
+                                    <span class="tech-item ethical-hacking">Ethical Hacking</span>
+                                </div>
+                                <div class="certifications-section">
+                                    <h5 data-ar="الشهادات المهنية" data-en="Professional Certifications">الشهادات المهنية</h5>
+                                    <div class="cert-stack">
+                                        <span class="cert-item cct">CCT</span>
+                                        <span class="cert-item ceh">CEH</span>
+                                        <span class="cert-item comptia">CompTIA Security+</span>
+                                        <span class="cert-item cissp">CISSP</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="professional-summary">
+                            <div class="summary-card">
+                                <i class="fas fa-star"></i>
+                                <p data-ar="متخصص شامل في تطوير التطبيقات الحديثة من الويب إلى الهاتف المحمول، مع خبرة عميقة في الذكاء الاصطناعي وتعلم الآلة، وخبير في الأمن السيبراني وأنظمة التشغيل مع شهادات مهنية معتمدة" data-en="Comprehensive specialist in modern application development from web to mobile, with deep expertise in AI, machine learning, cybersecurity, and operating systems with certified professional credentials">متخصص شامل في تطوير التطبيقات الحديثة من الويب إلى الهاتف المحمول، مع خبرة عميقة في الذكاء الاصطناعي وتعلم الآلة، وخبير في الأمن السيبراني وأنظمة التشغيل مع شهادات مهنية معتمدة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-ar="تعلم البرمجة وهندسة البرمجيات" data-en="Learn Programming & Software Engineering">تعلم البرمجة وهندسة البرمجيات</h1>
+            <p data-ar="دليلك الشامل لتعلم البرمجة من الصفر إلى الاحتراف مع خبرة عملية في الأمن السيبراني" data-en="Your comprehensive guide to learning programming from zero to professional with practical cybersecurity experience">دليلك الشامل لتعلم البرمجة من الصفر إلى الاحتراف مع خبرة عملية في الأمن السيبراني</p>
+            <button class="cta-btn" data-ar="ابدأ التعلم" data-en="Start Learning">ابدأ التعلم</button>
+        </div>
+        <div class="hero-animation">
+            <div class="code-block">
+                <div class="code-line">console.log('Hello World!');</div>
+                <div class="code-line">function learn() { return 'success'; }</div>
+                <div class="code-line">const future = await code();</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="intro" class="section">
+        <div class="container">
+            <h2 data-ar="مقدمة عن البرمجة" data-en="Introduction to Programming">مقدمة عن البرمجة</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3 data-ar="ما هي البرمجة؟" data-en="What is Programming?">ما هي البرمجة؟</h3>
+                    <p data-ar="البرمجة هي عملية إنشاء تعليمات للحاسوب لحل المشاكل وأتمتة المهام" data-en="Programming is the process of creating instructions for computers to solve problems and automate tasks">البرمجة هي عملية إنشاء تعليمات للحاسوب لحل المشاكل وأتمتة المهام</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3 data-ar="لماذا تتعلم البرمجة؟" data-en="Why Learn Programming?">لماذا تتعلم البرمجة؟</h3>
+                    <p data-ar="البرمجة تفتح أبواب الإبداع والابتكار وتوفر فرص عمل متميزة في المستقبل" data-en="Programming opens doors to creativity and innovation, providing excellent career opportunities">البرمجة تفتح أبواب الإبداع والابتكار وتوفر فرص عمل متميزة في المستقبل</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programming Basics Section -->
+    <section id="programming" class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="أساسيات البرمجة" data-en="Programming Fundamentals">أساسيات البرمجة</h2>
+            <div class="programming-concepts">
+                <div class="concept-item">
+                    <h3 data-ar="المتغيرات (Variables)" data-en="Variables">المتغيرات (Variables)</h3>
+                    <div class="code-example">
+                        <code>let name = "أحمد"; // Arabic name<br>const age = 25; // Age constant</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="الدوال (Functions)" data-en="Functions">الدوال (Functions)</h3>
+                    <div class="code-example">
+                        <code>function greet(name) {<br>  return `مرحبا ${name}`;<br>}</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="الحلقات (Loops)" data-en="Loops">الحلقات (Loops)</h3>
+                    <div class="code-example">
+                        <code>for(let i = 0; i < 10; i++) {<br>  console.log(i);<br>}</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software Engineering Section -->
+    <section id="software-eng" class="section">
+        <div class="container">
+            <h2 data-ar="هندسة البرمجيات" data-en="Software Engineering">هندسة البرمجيات</h2>
+            <div class="se-concepts">
+                <div class="se-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3 data-ar="دورة حياة التطوير" data-en="Software Development Life Cycle">دورة حياة التطوير</h3>
+                    <p data-ar="التخطيط، التحليل، التصميم، التطوير، الاختبار، النشر، الصيانة" data-en="Planning, Analysis, Design, Development, Testing, Deployment, Maintenance">التخطيط، التحليل، التصميم، التطوير، الاختبار، النشر، الصيانة</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-users"></i>
+                    <h3 data-ar="العمل الجماعي" data-en="Team Collaboration">العمل الجماعي</h3>
+                    <p data-ar="Git، GitHub، Code Review، Agile Methodology" data-en="Git, GitHub, Code Review, Agile Methodology">Git، GitHub، Code Review، Agile Methodology</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3 data-ar="جودة الكود" data-en="Code Quality">جودة الكود</h3>
+                    <p data-ar="Clean Code، Testing، Documentation، Best Practices" data-en="Clean Code, Testing, Documentation, Best Practices">Clean Code، Testing، Documentation، Best Practices</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Section -->
+    <section id="javascript" class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="جافا سكريبت الأساسي" data-en="JavaScript Fundamentals">جافا سكريبت الأساسي</h2>
+            
+            <div class="js-section">
+                <h3 data-ar="Document Selectors" data-en="Document Selectors">Document Selectors</h3>
+                <div class="selector-examples">
+                    <div class="selector-item">
+                        <h4>getElementById</h4>
+                        <div class="code-example">
+                            <code>const element = document.getElementById('myId');</code>
+                        </div>
+                    </div>
+                    <div class="selector-item">
+                        <h4>querySelector</h4>
+                        <div class="code-example">
+                            <code>const element = document.querySelector('.myClass');</code>
+                        </div>
+                    </div>
+                    <div class="selector-item">
+                        <h4>querySelectorAll</h4>
+                        <div class="code-example">
+                            <code>const elements = document.querySelectorAll('div');</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="js-section">
+                <h3 data-ar="الدوال المهمة" data-en="Important Functions">الدوال المهمة</h3>
+                <div class="function-examples">
+                    <div class="function-item">
+                        <h4>addEventListener</h4>
+                        <div class="code-example">
+                            <code>element.addEventListener('click', function() {<br>  console.log('تم النقر!');<br>});</code>
+                        </div>
+                    </div>
+                    <div class="function-item">
+                        <h4>Array Methods</h4>
+                        <div class="code-example">
+                            <code>const numbers = [1, 2, 3, 4, 5];<br>const doubled = numbers.map(n => n * 2);<br>const filtered = numbers.filter(n => n > 3);</code>
+                        </div>
+                    </div>
+                    <div class="function-item">
+                        <h4>Async/Await</h4>
+                        <div class="code-example">
+                            <code>async function fetchData() {<br>  const response = await fetch('/api/data');<br>  const data = await response.json();<br>  return data;<br>}</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frameworks Section -->
+    <section id="frameworks" class="section">
+        <div class="container">
+            <h2 data-ar="الإطارات والمكتبات" data-en="Frameworks & Libraries">الإطارات والمكتبات</h2>
+            <div class="frameworks-grid">
+                <div class="framework-card">
+                    <i class="fab fa-vuejs"></i>
+                    <h3>Vue.js</h3>
+                    <p data-ar="إطار عمل تدريجي لبناء واجهات المستخدم" data-en="Progressive framework for building user interfaces">إطار عمل تدريجي لبناء واجهات المستخدم</p>
+                    <div class="code-example">
+                        <code>&lt;template&gt;<br>  &lt;div&gt;{{ message }}&lt;/div&gt;<br>&lt;/template&gt;</code>
+                    </div>
+                </div>
+                <div class="framework-card">
+                    <i class="fab fa-react"></i>
+                    <h3>Next.js</h3>
+                    <p data-ar="إطار عمل React للإنتاج مع SSR و SSG" data-en="Production-ready React framework with SSR and SSG">إطار عمل React للإنتاج مع SSR و SSG</p>
+                    <div class="code-example">
+                        <code>export default function Home() {<br>  return &lt;h1&gt;مرحبا بالعالم&lt;/h1&gt;;<br>}</code>
+                    </div>
+                </div>
+                <div class="framework-card">
+                    <i class="fas fa-wind"></i>
+                    <h3>Tailwind CSS</h3>
+                    <p data-ar="إطار عمل CSS للتصميم السريع" data-en="Utility-first CSS framework for rapid UI development">إطار عمل CSS للتصميم السريع</p>
+                    <div class="code-example">
+                        <code>&lt;div class="bg-blue-500 text-white p-4 rounded"&gt;<br>  محتوى جميل<br>&lt;/div&gt;</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced CSS Section -->
+    <section id="css-advanced" class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="CSS المتقدم" data-en="Advanced CSS">CSS المتقدم</h2>
+            
+            <div class="css-section">
+                <h3 data-ar="Flexbox" data-en="Flexbox">Flexbox</h3>
+                <div class="flexbox-demo">
+                    <div class="flex-container">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <div class="code-example">
+                        <code>.container {<br>  display: flex;<br>  justify-content: space-between;<br>  align-items: center;<br>}</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="css-section">
+                <h3 data-ar="CSS Grid" data-en="CSS Grid">CSS Grid</h3>
+                <div class="grid-demo">
+                    <div class="grid-container">
+                        <div class="grid-item">A</div>
+                        <div class="grid-item">B</div>
+                        <div class="grid-item">C</div>
+                        <div class="grid-item">D</div>
+                    </div>
+                    <div class="code-example">
+                        <code>.grid {<br>  display: grid;<br>  grid-template-columns: repeat(2, 1fr);<br>  gap: 20px;<br>}</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="css-section">
+                <h3 data-ar="Sass/SCSS" data-en="Sass/SCSS">Sass/SCSS</h3>
+                <div class="code-example">
+                    <code>$primary-color: #3498db;<br>$margin: 20px;<br><br>.button {<br>  background: $primary-color;<br>  margin: $margin;<br>  &:hover {<br>    background: darken($primary-color, 10%);<br>  }<br>}</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section class="section demo-section">
+        <div class="container">
+            <h2 data-ar="تجربة تفاعلية" data-en="Interactive Demo">تجربة تفاعلية</h2>
+            <div class="demo-container">
+                <div class="demo-controls">
+                    <button id="changeColor" data-ar="غير اللون" data-en="Change Color">غير اللون</button>
+                    <button id="addElement" data-ar="أضف عنصر" data-en="Add Element">أضف عنصر</button>
+                    <button id="animate" data-ar="حرك العناصر" data-en="Animate">حرك العناصر</button>
+                    <button id="resetDemo" data-ar="إعادة تعيين" data-en="Reset">إعادة تعيين</button>
+                </div>
+                <div id="demoArea" class="demo-area">
+                    <div class="demo-element">عنصر تفاعلي</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Editor Section (CodePen Style) -->
+    <section class="section code-editor-section">
+        <div class="container">
+            <h2 data-ar="محرر الأكواد التفاعلي" data-en="Interactive Code Editor">محرر الأكواد التفاعلي</h2>
+            <div class="code-editor-container">
+                <div class="editor-panel">
+                    <div class="editor-tabs">
+                        <button class="editor-tab active" data-tab="html" data-ar="HTML" data-en="HTML">HTML</button>
+                        <button class="editor-tab" data-tab="css" data-ar="CSS" data-en="CSS">CSS</button>
+                        <button class="editor-tab" data-tab="javascript" data-ar="JavaScript" data-en="JavaScript">JavaScript</button>
+                    </div>
+                    
+                    <div class="editor-content">
+                        <textarea id="htmlCode" class="code-textarea active" placeholder="اكتب كود HTML هنا...">
+&lt;div class="container"&gt;
+  &lt;h1&gt;مرحبا بك&lt;/h1&gt;
+  &lt;p&gt;هذا محرر أكواد تفاعلي&lt;/p&gt;
+&lt;/div&gt;</textarea>
+
+                        <textarea id="cssCode" class="code-textarea" placeholder="اكتب كود CSS هنا...">
+.container {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  color: white;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}</textarea>
+
+                        <textarea id="javascriptCode" class="code-textarea" placeholder="اكتب كود JavaScript هنا...">
+// يمكنك كتابة أكوادك هنا
+console.log('محرر الأكواد التفاعلي جاهز!');
+
+// مثال: تغيير النص عند النقر
+document.addEventListener('click', function() {
+  console.log('تم النقر على الصفحة');
+});</textarea>
+                    </div>
+
+                    <div class="editor-controls">
+                        <button id="zoomIn" class="zoom-btn" title="تكبير" data-ar="+" data-en="+">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button id="zoomOut" class="zoom-btn" title="تصغير" data-ar="-" data-en="-">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <button id="runCode" class="run-btn" data-ar="تشغيل" data-en="Run">تشغيل</button>
+                        <button id="resetCode" class="reset-btn" data-ar="إعادة تعيين" data-en="Reset">إعادة تعيين</button>
+                    </div>
+                </div>
+
+                <div class="preview-panel">
+                    <div class="preview-header">
+                        <h3 data-ar="المعاينة" data-en="Preview">المعاينة</h3>
+                    </div>
+                    <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts" title="Code Preview"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</h3>
+                    <p data-ar="تعلم البرمجة بطريقة تفاعلية وممتعة" data-en="Learn programming in an interactive and fun way">تعلم البرمجة بطريقة تفاعلية وممتعة</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="روابط مفيدة" data-en="Useful Links">روابط مفيدة</h4>
+                    <ul>
+                        <li><a href="#" data-ar="الدورات" data-en="Courses">الدورات</a></li>
+                        <li><a href="#" data-ar="المشاريع" data-en="Projects">المشاريع</a></li>
+                        <li><a href="#" data-ar="المجتمع" data-en="Community">المجتمع</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/msr7799" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-ar="© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة." data-en="© 2024 Programming Academy. All rights reserved.">© 2024 أكاديمية البرمجة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطوير تطبيقات الويب | Web Development</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/MagicBento.css">
+    <link rel="stylesheet" href="./css/MagicBentoCustomizer.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-code"></i>
+                <span data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</span>
+            </div>
+            <div class="nav-menu">
+                <a href="INDEX.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+                <a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a>
+                <a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a>
+                <a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a>
+                <a href="prompt-engineering.html" data-ar="هندسة التلقين" data-en="Prompt Engineering">هندسة التلقين</a>
+                <a href="cybersecurity.html" data-ar="الأمن السيبراني" data-en="Cybersecurity">الأمن السيبراني</a>
+            </div>
+            <div class="language-toggle">
+                <button id="langToggle" class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                </button>
+            </div>
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div style="flex: 1;">
+                <h1 data-ar="تطوير تطبيقات الويب" data-en="Web Development">تطوير تطبيقات الويب</h1>
+                <p data-ar="بناء تطبيقات ويب حديثة وتفاعلية باستخدام أحدث التقنيات" data-en="Building modern and interactive web applications using the latest technologies">بناء تطبيقات ويب حديثة وتفاعلية باستخدام أحدث التقنيات</p>
+            </div>
+            <div class="hero-animation">
+                <div class="code-block">
+                    <div class="code-line">const app = new React();</div>
+                    <div class="code-line">app.render(&lt;Component /&gt;);</div>
+                    <div class="code-line">console.log('Web App Ready!');</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="التقنيات والمهارات" data-en="Technologies & Skills">التقنيات والمهارات</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <i class="fab fa-html5" style="color: #e34c26;"></i>
+                    <h3>HTML5</h3>
+                    <p data-ar="بناء هيكل صفحات الويب بطريقة دلالية وصحيحة باستخدام أحدث معايير HTML5" data-en="Building semantically correct web page structures using the latest HTML5 standards">بناء هيكل صفحات الويب بطريقة دلالية وصحيحة باستخدام أحدث معايير HTML5</p>
+                </div>
+                <div class="content-card">
+                    <i class="fab fa-css3-alt" style="color: #1572b6;"></i>
+                    <h3>CSS3</h3>
+                    <p data-ar="تصميم واجهات مستخدم جميلة ومتجاوبة مع جميع الأجهزة باستخدام CSS3" data-en="Designing beautiful and responsive user interfaces for all devices using CSS3">تصميم واجهات مستخدم جميلة ومتجاوبة مع جميع الأجهزة باستخدام CSS3</p>
+                </div>
+                <div class="content-card">
+                    <i class="fab fa-js" style="color: #f7df1e;"></i>
+                    <h3>JavaScript</h3>
+                    <p data-ar="إضافة التفاعلية والديناميكية لصفحات الويب باستخدام JavaScript الحديث" data-en="Adding interactivity and dynamics to web pages using modern JavaScript">إضافة التفاعلية والديناميكية لصفحات الويب باستخدام JavaScript الحديث</p>
+                </div>
+                <div class="content-card">
+                    <i class="fab fa-react" style="color: #61dafb;"></i>
+                    <h3>React</h3>
+                    <p data-ar="بناء تطبيقات ويب معقدة وقابلة للتطوير باستخدام مكتبة React" data-en="Building complex and scalable web applications using React library">بناء تطبيقات ويب معقدة وقابلة للتطوير باستخدام مكتبة React</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-code" style="color: #3178c6;"></i>
+                    <h3>TypeScript</h3>
+                    <p data-ar="كتابة أكواد JavaScript آمنة ومنظمة باستخدام TypeScript" data-en="Writing safe and organized JavaScript code using TypeScript">كتابة أكواد JavaScript آمنة ومنظمة باستخدام TypeScript</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-tools"></i>
+                    <h3 data-ar="أدوات التطوير" data-en="Development Tools">أدوات التطوير</h3>
+                    <p data-ar="استخدام أدوات التطوير الحديثة مثل Webpack, Vite, وGit" data-en="Using modern development tools like Webpack, Vite, and Git">استخدام أدوات التطوير الحديثة مثل Webpack, Vite, وGit</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="المشاريع والخبرة العملية" data-en="Projects & Practical Experience">المشاريع والخبرة العملية</h2>
+            <div class="se-concepts">
+                <div class="se-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3 data-ar="تطبيقات Single Page" data-en="Single Page Applications">تطبيقات Single Page</h3>
+                    <p data-ar="بناء تطبيقات صفحة واحدة سريعة وسلسة باستخدام React وVue.js" data-en="Building fast and smooth single-page applications using React and Vue.js">بناء تطبيقات صفحة واحدة سريعة وسلسة باستخدام React وVue.js</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3 data-ar="تصميم متجاوب" data-en="Responsive Design">تصميم متجاوب</h3>
+                    <p data-ar="إنشاء واجهات تعمل بكفاءة على جميع الأجهزة من الهواتف إلى الحواسيب" data-en="Creating interfaces that work efficiently on all devices from phones to computers">إنشاء واجهات تعمل بكفاءة على جميع الأجهزة من الهواتف إلى الحواسيب</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3 data-ar="تجربة المستخدم" data-en="User Experience">تجربة المستخدم</h3>
+                    <p data-ar="تصميم واجهات سهلة الاستخدام وجذابة تركز على تجربة المستخدم" data-en="Designing user-friendly and attractive interfaces focused on user experience">تصميم واجهات سهلة الاستخدام وجذابة تركز على تجربة المستخدم</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Practices Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="أفضل الممارسات" data-en="Best Practices">أفضل الممارسات</h2>
+            <div class="programming-concepts">
+                <div class="concept-item">
+                    <h3 data-ar="كود نظيف ومنظم" data-en="Clean and Organized Code">كود نظيف ومنظم</h3>
+                    <p data-ar="كتابة أكواد قابلة للقراءة والصيانة تتبع معايير الصناعة" data-en="Writing readable and maintainable code following industry standards">كتابة أكواد قابلة للقراءة والصيانة تتبع معايير الصناعة</p>
+                    <div class="code-example">
+                        <code>// مثال على كود React نظيف<br>
+const UserProfile = ({ user }) => {<br>
+  return (<br>
+    &lt;div className="profile"&gt;<br>
+      &lt;h2&gt;{user.name}&lt;/h2&gt;<br>
+      &lt;p&gt;{user.email}&lt;/p&gt;<br>
+    &lt;/div&gt;<br>
+  );<br>
+};</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="الأداء والتحسين" data-en="Performance & Optimization">الأداء والتحسين</h3>
+                    <p data-ar="تحسين سرعة تحميل وأداء التطبيقات للحصول على أفضل تجربة" data-en="Optimizing loading speed and application performance for the best experience">تحسين سرعة تحميل وأداء التطبيقات للحصول على أفضل تجربة</p>
+                    <div class="code-example">
+                        <code>// Lazy Loading للمكونات<br>
+const Dashboard = lazy(() => import('./Dashboard'));<br><br>
+// Code Splitting<br>
+&lt;Suspense fallback={&lt;Loading /&gt;}&gt;<br>
+  &lt;Dashboard /&gt;<br>
+&lt;/Suspense&gt;</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="الأمان" data-en="Security">الأمان</h3>
+                    <p data-ar="تطبيق معايير الأمان لحماية البيانات والمستخدمين" data-en="Implementing security standards to protect data and users">تطبيق معايير الأمان لحماية البيانات والمستخدمين</p>
+                    <div class="code-example">
+                        <code>// حماية من XSS<br>
+const sanitizeInput = (input) => {<br>
+  return DOMPurify.sanitize(input);<br>
+};<br><br>
+// استخدام HTTPS و CORS بشكل صحيح</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Magic Bento Cards Section -->
+    <section class="bento-section">
+        <div class="container">
+            <h2 data-ar="بطاقات تفاعلية" data-en="Interactive Cards">بطاقات تفاعلية</h2>
+            
+            <div class="bento-with-customizer">
+                <!-- Customizer Panel -->
+                <div class="bento-customizer-wrapper">
+                    <div id="magicBentoCustomizer"></div>
+                </div>
+                
+                <!-- Bento Cards -->
+                <div class="bento-cards-wrapper">
+                    <div id="magicBentoContainer"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</h3>
+                    <p data-ar="تعلم البرمجة بطريقة تفاعلية وممتعة" data-en="Learn programming in an interactive and fun way">تعلم البرمجة بطريقة تفاعلية وممتعة</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="الخبرات" data-en="Expertise">الخبرات</h4>
+                    <ul>
+                        <li><a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a></li>
+                        <li><a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a></li>
+                        <li><a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/msr7799" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-ar="© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة." data-en="© 2025 Programming Academy. All rights reserved.">© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/MagicBento.js"></script>
+    <script src="./js/MagicBentoCustomizer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const magicBento = new MagicBento('magicBentoContainer', {
+                textAutoHide: true,
+                enableStars: true,
+                enableSpotlight: true,
+                enableBorderGlow: true,
+                enableTilt: false,
+                enableMagnetism: true,
+                clickEffect: true,
+                spotlightRadius: 300,
+                particleCount: 12,
+                glowColor: '132, 0, 255'
+            });
+            
+            const customizer = new MagicBentoCustomizer('magicBentoCustomizer', magicBento);
+            
+            document.getElementById('langToggle')?.addEventListener('click', function() {
+                setTimeout(() => {
+                    const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                    magicBento.updateLanguage(currentLang);
+                    customizer.updateLanguage(currentLang);
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

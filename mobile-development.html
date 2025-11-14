@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطوير التطبيقات المحمولة | Mobile Development</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/MagicBento.css">
+    <link rel="stylesheet" href="./css/MagicBentoCustomizer.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-code"></i>
+                <span data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</span>
+            </div>
+            <div class="nav-menu">
+                <a href="INDEX.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+                <a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a>
+                <a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a>
+                <a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a>
+                <a href="prompt-engineering.html" data-ar="هندسة التلقين" data-en="Prompt Engineering">هندسة التلقين</a>
+                <a href="cybersecurity.html" data-ar="الأمن السيبراني" data-en="Cybersecurity">الأمن السيبراني</a>
+            </div>
+            <div class="language-toggle">
+                <button id="langToggle" class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                </button>
+            </div>
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div style="flex: 1;">
+                <h1 data-ar="تطوير التطبيقات المحمولة" data-en="Mobile Development">تطوير التطبيقات المحمولة</h1>
+                <p data-ar="بناء تطبيقات محمولة عالية الأداء لأنظمة iOS و Android" data-en="Building high-performance mobile applications for iOS and Android">بناء تطبيقات محمولة عالية الأداء لأنظمة iOS و Android</p>
+            </div>
+            <div class="hero-animation">
+                <div class="code-block">
+                    <div class="code-line">class MyApp extends StatelessWidget {</div>
+                    <div class="code-line">  Widget build() => MaterialApp();</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="التقنيات والأدوات" data-en="Technologies & Tools">التقنيات والأدوات</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <i class="fas fa-mobile-alt" style="color: #02569B;"></i>
+                    <h3>Dart</h3>
+                    <p data-ar="لغة برمجة حديثة وقوية لبناء تطبيقات الهاتف المحمول" data-en="Modern and powerful programming language for building mobile applications">لغة برمجة حديثة وقوية لبناء تطبيقات الهاتف المحمول</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-layer-group" style="color: #02569B;"></i>
+                    <h3>Flutter</h3>
+                    <p data-ar="إطار عمل متطور لبناء تطبيقات محمولة جميلة عبر المنصات" data-en="Advanced framework for building beautiful cross-platform mobile applications">إطار عمل متطور لبناء تطبيقات محمولة جميلة عبر المنصات</p>
+                </div>
+                <div class="content-card">
+                    <i class="fab fa-android" style="color: #3DDC84;"></i>
+                    <h3>Android</h3>
+                    <p data-ar="تطوير تطبيقات Android الأصلية بأداء عالي" data-en="Developing native Android applications with high performance">تطوير تطبيقات Android الأصلية بأداء عالي</p>
+                </div>
+                <div class="content-card">
+                    <i class="fab fa-apple" style="color: #000000;"></i>
+                    <h3>iOS</h3>
+                    <p data-ar="بناء تطبيقات iOS متميزة تتبع معايير Apple" data-en="Building excellent iOS applications following Apple standards">بناء تطبيقات iOS متميزة تتبع معايير Apple</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-database"></i>
+                    <h3 data-ar="قواعد البيانات المحلية" data-en="Local Databases">قواعد البيانات المحلية</h3>
+                    <p data-ar="استخدام SQLite و Hive لتخزين البيانات محلياً" data-en="Using SQLite and Hive for local data storage">استخدام SQLite و Hive لتخزين البيانات محلياً</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-plug"></i>
+                    <h3 data-ar="التكامل مع APIs" data-en="API Integration">التكامل مع APIs</h3>
+                    <p data-ar="ربط التطبيقات بالخدمات السحابية والـ APIs" data-en="Connecting applications with cloud services and APIs">ربط التطبيقات بالخدمات السحابية والـ APIs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flutter Features Section -->
+    <section class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="مميزات Flutter" data-en="Flutter Features">مميزات Flutter</h2>
+            <div class="se-concepts">
+                <div class="se-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3 data-ar="أداء عالي" data-en="High Performance">أداء عالي</h3>
+                    <p data-ar="تطبيقات سريعة ومرنة بأداء يقترب من التطبيقات الأصلية" data-en="Fast and flexible applications with near-native performance">تطبيقات سريعة ومرنة بأداء يقترب من التطبيقات الأصلية</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3 data-ar="واجهات جميلة" data-en="Beautiful UIs">واجهات جميلة</h3>
+                    <p data-ar="مكتبة غنية من Widgets لبناء واجهات مستخدم رائعة" data-en="Rich library of widgets for building stunning user interfaces">مكتبة غنية من Widgets لبناء واجهات مستخدم رائعة</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3 data-ar="Hot Reload" data-en="Hot Reload">Hot Reload</h3>
+                    <p data-ar="رؤية التغييرات فوراً دون إعادة تشغيل التطبيق" data-en="See changes instantly without restarting the application">رؤية التغييرات فوراً دون إعادة تشغيل التطبيق</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Examples Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="أمثلة البرمجة" data-en="Code Examples">أمثلة البرمجة</h2>
+            <div class="programming-concepts">
+                <div class="concept-item">
+                    <h3 data-ar="بناء Widget بسيط" data-en="Building a Simple Widget">بناء Widget بسيط</h3>
+                    <div class="code-example">
+                        <code>class MyWidget extends StatelessWidget {<br>
+  @override<br>
+  Widget build(BuildContext context) {<br>
+    return Container(<br>
+      padding: EdgeInsets.all(20),<br>
+      child: Text(<br>
+        'مرحباً بك في Flutter',<br>
+        style: TextStyle(fontSize: 24),<br>
+      ),<br>
+    );<br>
+  }<br>
+}</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="إدارة الحالة" data-en="State Management">إدارة الحالة</h3>
+                    <div class="code-example">
+                        <code>class Counter extends StatefulWidget {<br>
+  @override<br>
+  _CounterState createState() => _CounterState();<br>
+}<br><br>
+class _CounterState extends State&lt;Counter&gt; {<br>
+  int count = 0;<br><br>
+  void increment() {<br>
+    setState(() {<br>
+      count++;<br>
+    });<br>
+  }<br>
+}</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="التنقل بين الصفحات" data-en="Navigation">التنقل بين الصفحات</h3>
+                    <div class="code-example">
+                        <code>// الانتقال إلى صفحة جديدة<br>
+Navigator.push(<br>
+  context,<br>
+  MaterialPageRoute(<br>
+    builder: (context) => SecondPage(),<br>
+  ),<br>
+);<br><br>
+// العودة للصفحة السابقة<br>
+Navigator.pop(context);</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Practices Section -->
+    <section class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="أفضل الممارسات" data-en="Best Practices">أفضل الممارسات</h2>
+            <div class="se-concepts">
+                <div class="se-item">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h3 data-ar="تنظيم المشروع" data-en="Project Structure">تنظيم المشروع</h3>
+                    <p data-ar="استخدام بنية مشروع واضحة ومنظمة (MVC, MVVM, Clean Architecture)" data-en="Using clear and organized project structure (MVC, MVVM, Clean Architecture)">استخدام بنية مشروع واضحة ومنظمة (MVC, MVVM, Clean Architecture)</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3 data-ar="تحسين الأداء" data-en="Performance Optimization">تحسين الأداء</h3>
+                    <p data-ar="تقليل عمليات Build وتحسين استخدام الذاكرة" data-en="Reducing build operations and optimizing memory usage">تقليل عمليات Build وتحسين استخدام الذاكرة</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-bug"></i>
+                    <h3 data-ar="الاختبار" data-en="Testing">الاختبار</h3>
+                    <p data-ar="كتابة Unit Tests و Widget Tests لضمان جودة التطبيق" data-en="Writing Unit Tests and Widget Tests to ensure app quality">كتابة Unit Tests و Widget Tests لضمان جودة التطبيق</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Magic Bento Cards Section -->
+    <section class="bento-section">
+        <div class="container">
+            <h2 data-ar="بطاقات تفاعلية" data-en="Interactive Cards">بطاقات تفاعلية</h2>
+            
+            <div class="bento-with-customizer">
+                <!-- Customizer Panel -->
+                <div class="bento-customizer-wrapper">
+                    <div id="magicBentoCustomizer"></div>
+                </div>
+                
+                <!-- Bento Cards -->
+                <div class="bento-cards-wrapper">
+                    <div id="magicBentoContainer"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</h3>
+                    <p data-ar="تعلم البرمجة بطريقة تفاعلية وممتعة" data-en="Learn programming in an interactive and fun way">تعلم البرمجة بطريقة تفاعلية وممتعة</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="الخبرات" data-en="Expertise">الخبرات</h4>
+                    <ul>
+                        <li><a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a></li>
+                        <li><a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a></li>
+                        <li><a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/msr7799" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-ar="© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة." data-en="© 2025 Programming Academy. All rights reserved.">© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/MagicBento.js"></script>
+    <script src="./js/MagicBentoCustomizer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const magicBento = new MagicBento('magicBentoContainer', {
+                textAutoHide: true,
+                enableStars: true,
+                enableSpotlight: true,
+                enableBorderGlow: true,
+                enableTilt: false,
+                enableMagnetism: true,
+                clickEffect: true,
+                spotlightRadius: 300,
+                particleCount: 12,
+                glowColor: '132, 0, 255'
+            });
+            
+            const customizer = new MagicBentoCustomizer('magicBentoCustomizer', magicBento);
+            
+            document.getElementById('langToggle')?.addEventListener('click', function() {
+                setTimeout(() => {
+                    const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                    magicBento.updateLanguage(currentLang);
+                    customizer.updateLanguage(currentLang);
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>محاضرة البرمجة وهندسة البرمجيات | Programming & Software Engineering Lecture</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/MagicBento.css">
+    <link rel="stylesheet" href="./css/MagicBentoCustomizer.css">
+    <link rel="stylesheet" href="./css/ExamplesCards.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -30,6 +33,11 @@
                     <i class="fas fa-globe"></i>
                     <span>EN</span>
                 </button>
+            </div>
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
@@ -62,86 +70,96 @@
                         <h3 data-ar="الخبرات التقنية والتخصصات" data-en="Technical Expertise & Specializations">الخبرات التقنية والتخصصات</h3>
                         
                         <div class="expertise-grid">
-                            <div class="expertise-category">
-                                <div class="category-header">
-                                    <i class="fas fa-globe"></i>
-                                    <h4 data-ar="تطوير تطبيقات الويب" data-en="Web Development">تطوير تطبيقات الويب</h4>
-                                </div>
-                                <div class="tech-stack">
-                                    <span class="tech-item html">HTML</span>
-                                    <span class="tech-item css">CSS</span>
-                                    <span class="tech-item js">JavaScript</span>
-                                    <span class="tech-item react">React</span>
-                                    <span class="tech-item ts">TypeScript</span>
-                                </div>
-                            </div>
-                            
-                            <div class="expertise-category">
-                                <div class="category-header">
-                                    <i class="fas fa-mobile-alt"></i>
-                                    <h4 data-ar="تطوير التطبيقات المحمولة" data-en="Mobile Development">تطوير التطبيقات المحمولة</h4>
-                                </div>
-                                <div class="tech-stack">
-                                    <span class="tech-item dart">Dart</span>
-                                    <span class="tech-item flutter">Flutter</span>
-                                    <span class="tech-item native">Native Platforms</span>
-                                    <span class="tech-item mobile-apps">Mobile Apps</span>
-                                </div>
-                            </div>
-                            
-                            <div class="expertise-category">
-                                <div class="category-header">
-                                    <i class="fas fa-brain"></i>
-                                    <h4 data-ar="الذكاء الاصطناعي وعلم البيانات" data-en="AI & Data Science">الذكاء الاصطناعي وعلم البيانات</h4>
-                                </div>
-                                <div class="tech-stack">
-                                    <span class="tech-item python">Python</span>
-                                    <span class="tech-item pytorch">PyTorch</span>
-                                    <span class="tech-item neural">Neural Networks</span>
-                                    <span class="tech-item ml">Machine Learning</span>
-                                    <span class="tech-item fine-tuning">Fine-tuning</span>
-                                </div>
-                                <div class="experience-note">
-                                    <i class="fas fa-clock"></i>
-                                    <span data-ar="خبرة سنة ونصف في Python - وصولاً للمعادلات العصبية" data-en="1.5 years Python experience - Advanced to Neural Functions">خبرة سنة ونصف في Python - وصولاً للمعادلات العصبية</span>
-                                </div>
-                            </div>
-                            
-                            <div class="expertise-category">
-                                <div class="category-header">
-                                    <i class="fas fa-robot"></i>
-                                    <h4 data-ar="هندسة التلقين والذكاء الاصطناعي" data-en="Prompt Engineering & AI">هندسة التلقين والذكاء الاصطناعي</h4>
-                                </div>
-                                <div class="tech-stack">
-                                    <span class="tech-item prompt">Prompt Engineering</span>
-                                    <span class="tech-item ai-expert">AI Expert</span>
-                                    <span class="tech-item colab">Google Colab</span>
-                                    <span class="tech-item ml-fundamentals">ML Fundamentals</span>
-                                </div>
-                            </div>
-                            
-                            <div class="expertise-category">
-                                <div class="category-header">
-                                    <i class="fas fa-shield-alt"></i>
-                                    <h4 data-ar="الأمن السيبراني وأنظمة التشغيل" data-en="Cybersecurity & Operating Systems">الأمن السيبراني وأنظمة التشغيل</h4>
-                                </div>
-                                <div class="tech-stack">
-                                    <span class="tech-item linux">Linux Expert</span>
-                                    <span class="tech-item powershell">PowerShell</span>
-                                    <span class="tech-item bash">Bash Scripting</span>
-                                    <span class="tech-item network-security">Network Security</span>
-                                    <span class="tech-item ethical-hacking">Ethical Hacking</span>
-                                </div>
-                                <div class="certifications-section">
-                                    <h5 data-ar="الشهادات المهنية" data-en="Professional Certifications">الشهادات المهنية</h5>
-                                    <div class="cert-stack">
-                                        <span class="cert-item cct">CCT</span>
-                                        <span class="cert-item ceh">CEH</span>
-                                        <span class="cert-item comptia">CompTIA Security+</span>
-                                        <span class="cert-item cissp">CISSP</span>
+                            <a href="web-development.html" style="text-decoration: none; color: inherit;">
+                                <div class="expertise-category">
+                                    <div class="category-header">
+                                        <i class="fas fa-globe"></i>
+                                        <h4 data-ar="تطوير تطبيقات الويب" data-en="Web Development">تطوير تطبيقات الويب</h4>
+                                    </div>
+                                    <div class="tech-stack">
+                                        <span class="tech-item html">HTML</span>
+                                        <span class="tech-item css">CSS</span>
+                                        <span class="tech-item js">JavaScript</span>
+                                        <span class="tech-item react">React</span>
+                                        <span class="tech-item ts">TypeScript</span>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
+                            
+                            <a href="mobile-development.html" style="text-decoration: none; color: inherit;">
+                                <div class="expertise-category">
+                                    <div class="category-header">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        <h4 data-ar="تطوير التطبيقات المحمولة" data-en="Mobile Development">تطوير التطبيقات المحمولة</h4>
+                                    </div>
+                                    <div class="tech-stack">
+                                        <span class="tech-item dart">Dart</span>
+                                        <span class="tech-item flutter">Flutter</span>
+                                        <span class="tech-item native">Native Platforms</span>
+                                        <span class="tech-item mobile-apps">Mobile Apps</span>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                            <a href="ai-datascience.html" style="text-decoration: none; color: inherit;">
+                                <div class="expertise-category">
+                                    <div class="category-header">
+                                        <i class="fas fa-brain"></i>
+                                        <h4 data-ar="الذكاء الاصطناعي وعلم البيانات" data-en="AI & Data Science">الذكاء الاصطناعي وعلم البيانات</h4>
+                                    </div>
+                                    <div class="tech-stack">
+                                        <span class="tech-item python">Python</span>
+                                        <span class="tech-item pytorch">PyTorch</span>
+                                        <span class="tech-item neural">Neural Networks</span>
+                                        <span class="tech-item ml">Machine Learning</span>
+                                        <span class="tech-item fine-tuning">Fine-tuning</span>
+                                    </div>
+                                    <div class="experience-note">
+                                        <i class="fas fa-clock"></i>
+                                        <span data-ar="خبرة سنة ونصف في Python - وصولاً للمعادلات العصبية" data-en="1.5 years Python experience - Advanced to Neural Functions">خبرة سنة ونصف في Python - وصولاً للمعادلات العصبية</span>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                            <a href="prompt-engineering.html" style="text-decoration: none; color: inherit;">
+                                <div class="expertise-category">
+                                    <div class="category-header">
+                                        <i class="fas fa-robot"></i>
+                                        <h4 data-ar="هندسة التلقين والذكاء الاصطناعي" data-en="Prompt Engineering & AI">هندسة التلقين والذكاء الاصطناعي</h4>
+                                    </div>
+                                    <div class="tech-stack">
+                                        <span class="tech-item prompt">Prompt Engineering</span>
+                                        <span class="tech-item ai-expert">AI Expert</span>
+                                        <span class="tech-item colab">Google Colab</span>
+                                        <span class="tech-item ml-fundamentals">ML Fundamentals</span>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                            <a href="cybersecurity.html" style="text-decoration: none; color: inherit;">
+                                <div class="expertise-category">
+                                    <div class="category-header">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <h4 data-ar="الأمن السيبراني وأنظمة التشغيل" data-en="Cybersecurity & Operating Systems">الأمن السيبراني وأنظمة التشغيل</h4>
+                                    </div>
+                                    <div class="tech-stack">
+                                        <span class="tech-item linux">Linux Expert</span>
+                                        <span class="tech-item powershell">PowerShell</span>
+                                        <span class="tech-item bash">Bash Scripting</span>
+                                        <span class="tech-item network-security">Network Security</span>
+                                        <span class="tech-item ethical-hacking">Ethical Hacking</span>
+                                    </div>
+                                    <div class="certifications-section">
+                                        <h5 data-ar="الشهادات المهنية" data-en="Professional Certifications">الشهادات المهنية</h5>
+                                        <div class="cert-stack">
+                                            <span class="cert-item cct">CCT</span>
+                                            <span class="cert-item ceh">CEH</span>
+                                            <span class="cert-item comptia">CompTIA Security+</span>
+                                            <span class="cert-item cissp">CISSP</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                         
                         <div class="professional-summary">
@@ -404,34 +422,161 @@
                     </div>
                     
                     <div class="editor-content">
-                        <textarea id="htmlCode" class="code-textarea active" placeholder="اكتب كود HTML هنا...">
-&lt;div class="container"&gt;
+                        <textarea id="htmlCode" class="code-textarea active" placeholder="Write HTML code here... / اكتب كود HTML هنا">
+&lt;!-- النسخة العربية --&gt;
+&lt;div class="container-arabic"&gt;
   &lt;h1&gt;مرحبا بك&lt;/h1&gt;
-  &lt;p&gt;هذا محرر أكواد تفاعلي&lt;/p&gt;
+  &lt;button id="clickText-ar" class="magic-button"&gt;
+    &lt;span&gt;انقر هنا&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- English version --&gt;
+&lt;div class="container-english"&gt;
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;button id="clickText-en" class="magic-button"&gt;
+    &lt;span&gt;Click Me&lt;/span&gt;
+  &lt;/button&gt;
 &lt;/div&gt;</textarea>
 
-                        <textarea id="cssCode" class="code-textarea" placeholder="اكتب كود CSS هنا...">
-.container {
+                        <textarea id="cssCode" class="code-textarea" placeholder="Write CSS code here... / اكتب كود CSS هنا">
+/* تنسيق النسخة العربية */
+.container-arabic {
   text-align: center;
-  padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 10px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
   color: white;
+  margin-bottom: 20px;
 }
 
-h1 {
+.container-arabic h1 {
   font-size: 2.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* English version styling */
+.container-english {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+  border-radius: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.container-english h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Magic Button Styling - أنيق وأسود */
+.magic-button {
+  position: relative;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.magic-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.magic-button:hover {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-color: #555;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.magic-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.magic-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* أنيميشن عند النقر - Animation on click */
+.magic-button.clicked {
+  animation: pulse 0.5s ease;
+  background: linear-gradient(135deg, #8400ff 0%, #6200cc 100%);
+  border-color: #8400ff;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }</textarea>
 
-                        <textarea id="javascriptCode" class="code-textarea" placeholder="اكتب كود JavaScript هنا...">
+                        <textarea id="javascriptCode" class="code-textarea" placeholder="Write JavaScript code here... / اكتب كود JavaScript هنا">
 // يمكنك كتابة أكوادك هنا
 console.log('محرر الأكواد التفاعلي جاهز!');
 
-// مثال: تغيير النص عند النقر
-document.addEventListener('click', function() {
-  console.log('تم النقر على الصفحة');
-});</textarea>
+// تفاعل الزر العربي - Arabic button interaction
+const arabicBtn = document.getElementById('clickText-ar');
+if (arabicBtn) {
+  arabicBtn.addEventListener('click', function() {
+    console.log('تم النقر على الزر العربي');
+    
+    // إضافة أنيميشن
+    this.classList.add('clicked');
+    
+    // تغيير النص
+    const span = this.querySelector('span');
+    const originalText = span.textContent;
+    span.textContent = 'تم النقر! ✨';
+    
+    // إعادة النص بعد ثانية
+    setTimeout(() => {
+      this.classList.remove('clicked');
+      span.textContent = originalText;
+    }, 1000);
+  });
+}
+
+// English button interaction
+const englishBtn = document.getElementById('clickText-en');
+if (englishBtn) {
+  englishBtn.addEventListener('click', function() {
+    console.log('English button clicked!');
+    
+    // Add animation
+    this.classList.add('clicked');
+    
+    // Change text
+    const span = this.querySelector('span');
+    const originalText = span.textContent;
+    span.textContent = 'Clicked! ✨';
+    
+    // Reset after 1 second
+    setTimeout(() => {
+      this.classList.remove('clicked');
+      span.textContent = originalText;
+    }, 1000);
+  });
+}</textarea>
                     </div>
 
                     <div class="editor-controls">
@@ -446,11 +591,94 @@ document.addEventListener('click', function() {
                     </div>
                 </div>
 
+                <div class="editor-resizer" id="editorResizer"></div>
+
                 <div class="preview-panel">
                     <div class="preview-header">
                         <h3 data-ar="المعاينة" data-en="Preview">المعاينة</h3>
                     </div>
                     <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts" title="Code Preview"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Magic Bento Section -->
+    <section class="magic-bento-section">
+        <div class="container">
+            <h2 style="background: linear-gradient(135deg, #b8b8b8 0%, #8a8a8a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" data-ar="بطاقات تفاعلية" data-en="Interactive Cards">بطاقات تفاعلية</h2>
+            
+            <div class="bento-with-customizer">
+                <!-- Customizer Panel -->
+                <div class="bento-customizer-wrapper">
+                    <div id="magicBentoCustomizer"></div>
+                </div>
+                
+                <!-- Bento Cards -->
+                <div class="bento-cards-wrapper">
+                    <div id="magicBentoContainer"></div>
+                </div>
+            </div>
+            
+            <div class="bento-grid" id="bentoGrid" style="display: none;">
+                <div class="bento-card" data-color="#060010">
+                    <div class="card-header">
+                        <span class="card-label" data-ar="رؤى" data-en="Insights">رؤى</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-ar="تحليلات" data-en="Analytics">تحليلات</h3>
+                        <p class="card-description" data-ar="تتبع سلوك المستخدمين" data-en="Track user behavior">تتبع سلوك المستخدمين</p>
+                    </div>
+                </div>
+
+                <div class="bento-card" data-color="#060010">
+                    <div class="card-header">
+                        <span class="card-label" data-ar="نظرة عامة" data-en="Overview">نظرة عامة</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-ar="لوحة التحكم" data-en="Dashboard">لوحة التحكم</h3>
+                        <p class="card-description" data-ar="عرض البيانات المركزية" data-en="Centralized data view">عرض البيانات المركزية</p>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-card-large" data-color="#060010">
+                    <div class="card-header">
+                        <span class="card-label" data-ar="عمل جماعي" data-en="Teamwork">عمل جماعي</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-ar="التعاون" data-en="Collaboration">التعاون</h3>
+                        <p class="card-description" data-ar="العمل معاً بسلاسة" data-en="Work together seamlessly">العمل معاً بسلاسة</p>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-card-wide" data-color="#060010">
+                    <div class="card-header">
+                        <span class="card-label" data-ar="كفاءة" data-en="Efficiency">كفاءة</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-ar="الأتمتة" data-en="Automation">الأتمتة</h3>
+                        <p class="card-description" data-ar="تبسيط سير العمل" data-en="Streamline workflows">تبسيط سير العمل</p>
+                    </div>
+                </div>
+
+                <div class="bento-card" data-color="#060010">
+                    <div class="card-header">
+                        <span class="card-label" data-ar="اتصال" data-en="Connectivity">اتصال</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-ar="التكامل" data-en="Integration">التكامل</h3>
+                        <p class="card-description" data-ar="ربط الأدوات المفضلة" data-en="Connect favorite tools">ربط الأدوات المفضلة</p>
+                    </div>
+                </div>
+
+                <div class="bento-card" data-color="#060010">
+                    <div class="card-header">
+                        <span class="card-label" data-ar="حماية" data-en="Protection">حماية</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-ar="الأمان" data-en="Security">الأمان</h3>
+                        <p class="card-description" data-ar="حماية على مستوى المؤسسات" data-en="Enterprise-grade protection">حماية على مستوى المؤسسات</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -487,6 +715,52 @@ document.addEventListener('click', function() {
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/MagicBento.js"></script>
+    <script src="./js/MagicBentoCustomizer.js"></script>
+    <script src="./js/ExamplesCards.js"></script>
+    <script>
+        // Initialize Magic Bento with Customizer
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Examples Cards
+            const examplesCards = new ExamplesCards();
+            // Initialize MagicBento
+            const magicBento = new MagicBento('magicBentoContainer', {
+                textAutoHide: true,
+                enableStars: true,
+                enableSpotlight: true,
+                enableBorderGlow: true,
+                enableTilt: false,
+                enableMagnetism: true,
+                clickEffect: true,
+                spotlightRadius: 300,
+                particleCount: 12,
+                glowColor: '132, 0, 255'
+            });
+            
+            // Initialize Customizer
+            const customizer = new MagicBentoCustomizer('magicBentoCustomizer', magicBento);
+            
+            // Update language when toggled
+            const originalLangManager = window.LanguageManager;
+            if (originalLangManager) {
+                const langToggle = document.getElementById('langToggle');
+                langToggle?.addEventListener('click', function() {
+                    setTimeout(() => {
+                        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                        if (magicBento && magicBento.updateLanguage) {
+                            magicBento.updateLanguage(currentLang);
+                        }
+                        if (customizer && customizer.updateLanguage) {
+                            customizer.updateLanguage(currentLang);
+                        }
+                        if (examplesCards && examplesCards.updateLanguage) {
+                            examplesCards.updateLanguage(currentLang);
+                        }
+                    }, 100);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,3 +1,34 @@
+// Hamburger Menu Functionality
+class HamburgerMenu {
+    constructor() {
+        this.hamburger = document.getElementById('hamburgerMenu');
+        this.navMenu = document.querySelector('.nav-menu');
+        this.init();
+    }
+
+    init() {
+        if (this.hamburger) {
+            this.hamburger.addEventListener('click', () => this.toggleMenu());
+            
+            // Close menu when clicking on a link
+            const navLinks = this.navMenu.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => this.closeMenu());
+            });
+        }
+    }
+
+    toggleMenu() {
+        this.hamburger.classList.toggle('active');
+        this.navMenu.classList.toggle('active');
+    }
+
+    closeMenu() {
+        this.hamburger.classList.remove('active');
+        this.navMenu.classList.remove('active');
+    }
+}
+
 // Language Toggle Functionality
 class LanguageManager {
     constructor() {
@@ -576,9 +607,138 @@ class TechSkillsInteraction {
     }
 }
 
+// Magic Bento Cards Functionality
+class MagicBentoCards {
+    constructor() {
+        this.grid = document.getElementById('bentoGrid');
+        this.cards = document.querySelectorAll('.bento-card');
+        this.init();
+    }
+
+    init() {
+        if (!this.grid) return;
+
+        this.cards.forEach(card => {
+            // Mouse move for gradient effect
+            card.addEventListener('mousemove', (e) => this.handleMouseMove(e, card));
+            card.addEventListener('mouseleave', () => this.handleMouseLeave(card));
+            
+            // Click effect
+            card.addEventListener('click', (e) => this.handleClick(e, card));
+            
+            // Hover particles
+            card.addEventListener('mouseenter', () => this.createParticles(card));
+        });
+
+        // Global spotlight effect
+        document.addEventListener('mousemove', (e) => this.updateGlobalSpotlight(e));
+    }
+
+    handleMouseMove(e, card) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const percentX = (x / rect.width) * 100;
+        const percentY = (y / rect.height) * 100;
+        
+        card.style.setProperty('--mouse-x', `${percentX}%`);
+        card.style.setProperty('--mouse-y', `${percentY}%`);
+    }
+
+    handleMouseLeave(card) {
+        card.style.setProperty('--mouse-x', '50%');
+        card.style.setProperty('--mouse-y', '50%');
+    }
+
+    handleClick(e, card) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Create ripple effect
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(132, 0, 255, 0.6), transparent);
+            left: ${x}px;
+            top: ${y}px;
+            pointer-events: none;
+            animation: ripple-expand 0.6s ease-out forwards;
+        `;
+        
+        card.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+    }
+
+    createParticles(card) {
+        const particleCount = 8;
+        const rect = card.getBoundingClientRect();
+        
+        for (let i = 0; i < particleCount; i++) {
+            setTimeout(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * rect.width}px`;
+                particle.style.top = `${Math.random() * rect.height}px`;
+                particle.style.animationDelay = `${Math.random() * 2}s`;
+                
+                card.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 3000);
+            }, i * 100);
+        }
+    }
+
+    updateGlobalSpotlight(e) {
+        if (!this.grid) return;
+        
+        const gridRect = this.grid.getBoundingClientRect();
+        const inGrid = e.clientX >= gridRect.left && e.clientX <= gridRect.right &&
+                      e.clientY >= gridRect.top && e.clientY <= gridRect.bottom;
+        
+        if (!inGrid) return;
+        
+        this.cards.forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const centerX = cardRect.left + cardRect.width / 2;
+            const centerY = cardRect.top + cardRect.height / 2;
+            const distance = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+            
+            const maxDistance = 400;
+            const intensity = Math.max(0, (maxDistance - distance) / maxDistance);
+            
+            card.style.filter = `brightness(${1 + intensity * 0.3})`;
+        });
+    }
+}
+
+// Add ripple animation to CSS
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+    @keyframes ripple-expand {
+        from {
+            width: 10px;
+            height: 10px;
+            opacity: 1;
+        }
+        to {
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(rippleStyle);
+
 // Initialize all components when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all components
+    new HamburgerMenu();
     new LanguageManager();
     new InteractiveDemo();
     new SmoothScroll();
@@ -587,7 +747,9 @@ document.addEventListener('DOMContentLoaded', () => {
     new NavbarScrollEffect();
     new ReadingProgress();
     new TechSkillsInteraction();
+    new EditorResizer();
     new CodeEditor();
+    new MagicBentoCards();
     
     // Add some interactive effects
     addHoverEffects();
@@ -727,12 +889,86 @@ const DOMUtils = {
 // Make DOMUtils available globally for educational purposes
 window.DOMUtils = DOMUtils;
 
+// Editor Resizer Functionality
+class EditorResizer {
+    constructor() {
+        this.resizer = document.getElementById('editorResizer');
+        this.editorPanel = document.querySelector('.editor-panel');
+        this.previewPanel = document.querySelector('.preview-panel');
+        this.container = document.querySelector('.code-editor-container');
+        this.isDragging = false;
+        this.init();
+    }
+
+    init() {
+        if (!this.resizer) return;
+
+        this.resizer.addEventListener('mousedown', (e) => this.startDragging(e));
+        this.resizer.addEventListener('touchstart', (e) => this.startDragging(e));
+        document.addEventListener('mousemove', (e) => this.drag(e));
+        document.addEventListener('touchmove', (e) => this.drag(e));
+        document.addEventListener('mouseup', () => this.stopDragging());
+        document.addEventListener('touchend', () => this.stopDragging());
+    }
+
+    startDragging(e) {
+        this.isDragging = true;
+        this.resizer.classList.add('dragging');
+        const isVertical = window.innerWidth <= 1024;
+        document.body.style.cursor = isVertical ? 'row-resize' : 'col-resize';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+    }
+
+    drag(e) {
+        if (!this.isDragging) return;
+
+        const containerRect = this.container.getBoundingClientRect();
+        const isVertical = window.innerWidth <= 1024;
+        
+        if (isVertical) {
+            // Vertical drag for mobile/tablet
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            const offsetY = clientY - containerRect.top;
+            const containerHeight = containerRect.height;
+            
+            let percentage = (offsetY / containerHeight) * 100;
+            percentage = Math.max(30, Math.min(70, percentage));
+
+            this.editorPanel.style.flex = `0 0 ${percentage}%`;
+            this.previewPanel.style.flex = `0 0 ${100 - percentage}%`;
+        } else {
+            // Horizontal drag for desktop
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const offsetX = clientX - containerRect.left;
+            const containerWidth = containerRect.width;
+            
+            let percentage = (offsetX / containerWidth) * 100;
+            percentage = Math.max(30, Math.min(70, percentage));
+
+            this.editorPanel.style.flex = `0 0 ${percentage}%`;
+            this.previewPanel.style.flex = `0 0 ${100 - percentage}%`;
+        }
+        
+        e.preventDefault();
+    }
+
+    stopDragging() {
+        if (this.isDragging) {
+            this.isDragging = false;
+            this.resizer.classList.remove('dragging');
+            document.body.style.cursor = '';
+            document.body.style.userSelect = '';
+        }
+    }
+}
+
 // Code Editor Functionality
 class CodeEditor {
     constructor() {
         this.currentZoom = 1;
-        this.minZoom = 0.7;
-        this.maxZoom = 1.5;
+        this.minZoom = 0.8;
+        this.maxZoom = 2.5;
         this.zoomStep = 0.1;
         this.init();
     }
@@ -808,6 +1044,7 @@ class CodeEditor {
         if (this.currentZoom < this.maxZoom) {
             this.currentZoom += this.zoomStep;
             this.applyZoom();
+            this.showZoomIndicator();
         }
     }
 
@@ -815,6 +1052,7 @@ class CodeEditor {
         if (this.currentZoom > this.minZoom) {
             this.currentZoom -= this.zoomStep;
             this.applyZoom();
+            this.showZoomIndicator();
         }
     }
 
@@ -825,6 +1063,26 @@ class CodeEditor {
             textarea.style.lineHeight = (1.8 * this.currentZoom);
             textarea.style.padding = (2 * this.currentZoom) + 'rem';
         });
+    }
+
+    showZoomIndicator() {
+        // Remove existing indicator
+        const existingIndicator = document.querySelector('.zoom-indicator');
+        if (existingIndicator) {
+            existingIndicator.remove();
+        }
+
+        // Create new indicator
+        const indicator = document.createElement('div');
+        indicator.className = 'zoom-indicator';
+        indicator.textContent = `${Math.round(this.currentZoom * 100)}%`;
+        document.body.appendChild(indicator);
+
+        // Remove after 1 second
+        setTimeout(() => {
+            indicator.classList.add('fade-out');
+            setTimeout(() => indicator.remove(), 300);
+        }, 1000);
     }
 
     renderPreview() {
@@ -864,31 +1122,159 @@ class CodeEditor {
     }
 
     resetCode() {
-        this.htmlCode.value = `<div class="container">
+        this.htmlCode.value = `<!-- النسخة العربية -->
+<div class="container-arabic">
   <h1>مرحبا بك</h1>
-  <p>هذا محرر أكواد تفاعلي</p>
+  <button id="clickText-ar" class="magic-button">
+    <span>انقر هنا</span>
+  </button>
+</div>
+
+<!-- English version -->
+<div class="container-english">
+  <h1>Hello World</h1>
+  <button id="clickText-en" class="magic-button">
+    <span>Click Me</span>
+  </button>
 </div>`;
 
-        this.cssCode.value = `.container {
+        this.cssCode.value = `/* تنسيق النسخة العربية */
+.container-arabic {
   text-align: center;
-  padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 10px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
   color: white;
+  margin-bottom: 20px;
 }
 
-h1 {
+.container-arabic h1 {
   font-size: 2.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* English version styling */
+.container-english {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+  border-radius: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.container-english h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Magic Button Styling - أنيق وأسود */
+.magic-button {
+  position: relative;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.magic-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.magic-button:hover {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-color: #555;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.magic-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.magic-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* أنيميشن عند النقر - Animation on click */
+.magic-button.clicked {
+  animation: pulse 0.5s ease;
+  background: linear-gradient(135deg, #8400ff 0%, #6200cc 100%);
+  border-color: #8400ff;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }`;
+
 
         this.javascriptCode.value = `// يمكنك كتابة أكوادك هنا
 console.log('محرر الأكواد التفاعلي جاهز!');
 
-// مثال: تغيير النص عند النقر
-document.addEventListener('click', function() {
-  console.log('تم النقر على الصفحة');
-});`;
+// تفاعل الزر العربي - Arabic button interaction
+const arabicBtn = document.getElementById('clickText-ar');
+if (arabicBtn) {
+  arabicBtn.addEventListener('click', function() {
+    console.log('تم النقر على الزر العربي');
+    
+    // إضافة أنيميشن
+    this.classList.add('clicked');
+    
+    // تغيير النص
+    const span = this.querySelector('span');
+    const originalText = span.textContent;
+    span.textContent = 'تم النقر! ✨';
+    
+    // إعادة النص بعد ثانية
+    setTimeout(() => {
+      this.classList.remove('clicked');
+      span.textContent = originalText;
+    }, 1000);
+  });
+}
+
+// English button interaction
+const englishBtn = document.getElementById('clickText-en');
+if (englishBtn) {
+  englishBtn.addEventListener('click', function() {
+    console.log('English button clicked!');
+    
+    // Add animation
+    this.classList.add('clicked');
+    
+    // Change text
+    const span = this.querySelector('span');
+    const originalText = span.textContent;
+    span.textContent = 'Clicked! ✨';
+    
+    // Reset after 1 second
+    setTimeout(() => {
+      this.classList.remove('clicked');
+      span.textContent = originalText;
+    }, 1000);
+  });
+}`;
 
         this.renderPreview();
     }

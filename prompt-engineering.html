@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هندسة التلقين والذكاء الاصطناعي | Prompt Engineering & AI</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/MagicBento.css">
+    <link rel="stylesheet" href="./css/MagicBentoCustomizer.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-code"></i>
+                <span data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</span>
+            </div>
+            <div class="nav-menu">
+                <a href="INDEX.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+                <a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a>
+                <a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a>
+                <a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a>
+                <a href="prompt-engineering.html" data-ar="هندسة التلقين" data-en="Prompt Engineering">هندسة التلقين</a>
+                <a href="cybersecurity.html" data-ar="الأمن السيبراني" data-en="Cybersecurity">الأمن السيبراني</a>
+            </div>
+            <div class="language-toggle">
+                <button id="langToggle" class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                </button>
+            </div>
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div style="flex: 1;">
+                <h1 data-ar="هندسة التلقين والذكاء الاصطناعي" data-en="Prompt Engineering & AI">هندسة التلقين والذكاء الاصطناعي</h1>
+                <p data-ar="خبير في صياغة التعليمات الفعالة والتعامل مع نماذج الذكاء الاصطناعي المتقدمة" data-en="Expert in crafting effective prompts and working with advanced AI models">خبير في صياغة التعليمات الفعالة والتعامل مع نماذج الذكاء الاصطناعي المتقدمة</p>
+            </div>
+            <div class="hero-animation">
+                <div class="code-block">
+                    <div class="code-line">prompt = "Create a solution for..."</div>
+                    <div class="code-line">response = ai.generate(prompt)</div>
+                    <div class="code-line">optimize_output(response)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="المهارات الأساسية" data-en="Core Skills">المهارات الأساسية</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <i class="fas fa-robot"></i>
+                    <h3 data-ar="هندسة التلقين" data-en="Prompt Engineering">هندسة التلقين</h3>
+                    <p data-ar="صياغة تعليمات دقيقة وفعالة للحصول على أفضل النتائج من نماذج AI" data-en="Crafting precise and effective prompts to get the best results from AI models">صياغة تعليمات دقيقة وفعالة للحصول على أفضل النتائج من نماذج AI</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-brain"></i>
+                    <h3 data-ar="فهم نماذج اللغة" data-en="Understanding LLMs">فهم نماذج اللغة</h3>
+                    <p data-ar="معرفة عميقة بكيفية عمل نماذج اللغة الكبيرة مثل GPT وClaude" data-en="Deep knowledge of how large language models like GPT and Claude work">معرفة عميقة بكيفية عمل نماذج اللغة الكبيرة مثل GPT وClaude</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-magic"></i>
+                    <h3 data-ar="تحسين المخرجات" data-en="Output Optimization">تحسين المخرجات</h3>
+                    <p data-ar="تقنيات متقدمة لتحسين جودة ودقة مخرجات الذكاء الاصطناعي" data-en="Advanced techniques to improve the quality and accuracy of AI outputs">تقنيات متقدمة لتحسين جودة ودقة مخرجات الذكاء الاصطناعي</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3 data-ar="تكامل APIs" data-en="API Integration">تكامل APIs</h3>
+                    <p data-ar="دمج نماذج الذكاء الاصطناعي في التطبيقات والأنظمة" data-en="Integrating AI models into applications and systems">دمج نماذج الذكاء الاصطناعي في التطبيقات والأنظمة</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3 data-ar="أساسيات ML" data-en="ML Fundamentals">أساسيات ML</h3>
+                    <p data-ar="فهم قوي لأساسيات التعلم الآلي والمفاهيم الأساسية" data-en="Strong understanding of machine learning fundamentals and core concepts">فهم قوي لأساسيات التعلم الآلي والمفاهيم الأساسية</p>
+                </div>
+                <div class="content-card">
+                    <i class="fab fa-google"></i>
+                    <h3>Google Colab</h3>
+                    <p data-ar="استخدام متقدم لـ Google Colab في التطوير والاختبار" data-en="Advanced use of Google Colab for development and testing">استخدام متقدم لـ Google Colab في التطوير والاختبار</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Techniques Section -->
+    <section class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="تقنيات هندسة التلقين" data-en="Prompt Engineering Techniques">تقنيات هندسة التلقين</h2>
+            <div class="se-concepts">
+                <div class="se-item">
+                    <i class="fas fa-list-ol"></i>
+                    <h3 data-ar="Zero-Shot و Few-Shot" data-en="Zero-Shot & Few-Shot">Zero-Shot و Few-Shot</h3>
+                    <p data-ar="تقنيات التعلم بدون أمثلة أو بأمثلة قليلة للحصول على نتائج دقيقة" data-en="Learning techniques with zero or few examples to get accurate results">تقنيات التعلم بدون أمثلة أو بأمثلة قليلة للحصول على نتائج دقيقة</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-link"></i>
+                    <h3 data-ar="Chain of Thought" data-en="Chain of Thought">Chain of Thought</h3>
+                    <p data-ar="تقسيم المهام المعقدة إلى خطوات منطقية متسلسلة" data-en="Breaking down complex tasks into logical sequential steps">تقسيم المهام المعقدة إلى خطوات منطقية متسلسلة</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-theater-masks"></i>
+                    <h3 data-ar="Role Prompting" data-en="Role Prompting">Role Prompting</h3>
+                    <p data-ar="تحديد أدوار محددة للنموذج للحصول على إجابات متخصصة" data-en="Assigning specific roles to the model for specialized responses">تحديد أدوار محددة للنموذج للحصول على إجابات متخصصة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="أمثلة عملية" data-en="Practical Examples">أمثلة عملية</h2>
+            <div class="programming-concepts">
+                <div class="concept-item">
+                    <h3 data-ar="Zero-Shot Prompting" data-en="Zero-Shot Prompting">Zero-Shot Prompting</h3>
+                    <div class="code-example">
+                        <code>Prompt:<br>
+"قم بتصنيف النص التالي إلى فئات: إيجابي، سلبي، أو محايد:<br>
+'هذا المنتج رائع وأنصح به الجميع!'"<br><br>
+Response:<br>
+"التصنيف: إيجابي"</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="Few-Shot Learning" data-en="Few-Shot Learning">Few-Shot Learning</h3>
+                    <div class="code-example">
+                        <code>Prompt:<br>
+"أمثلة:<br>
+Input: 'أحببت هذا الفيلم' → Output: إيجابي<br>
+Input: 'كان الطعام سيئاً' → Output: سلبي<br>
+Input: 'الفندق عادي' → Output: محايد<br><br>
+Input: 'الخدمة ممتازة والموظفون متعاونون' → Output: ?"<br><br>
+Response: "إيجابي"</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="Chain of Thought" data-en="Chain of Thought">Chain of Thought</h3>
+                    <div class="code-example">
+                        <code>Prompt:<br>
+"حل هذه المسألة خطوة بخطوة:<br>
+إذا كان لدي 15 تفاحة وأعطيت 5 لصديقي، ثم اشتريت 8 تفاحات أخرى،<br>
+كم تفاحة أصبح لدي؟"<br><br>
+Response:<br>
+"دعنا نحل المسألة خطوة بخطوة:<br>
+1. البداية: 15 تفاحة<br>
+2. بعد الإعطاء: 15 - 5 = 10 تفاحات<br>
+3. بعد الشراء: 10 + 8 = 18 تفاحة<br>
+الجواب النهائي: 18 تفاحة"</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Models Section -->
+    <section class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="نماذج الذكاء الاصطناعي" data-en="AI Models">نماذج الذكاء الاصطناعي</h2>
+            <div class="frameworks-grid">
+                <div class="framework-card">
+                    <i class="fas fa-comments" style="color: #10A37F;"></i>
+                    <h3>GPT Models</h3>
+                    <p data-ar="خبرة في استخدام نماذج GPT-3.5، GPT-4 للمهام المختلفة" data-en="Experience using GPT-3.5, GPT-4 models for various tasks">خبرة في استخدام نماذج GPT-3.5، GPT-4 للمهام المختلفة</p>
+                </div>
+                <div class="framework-card">
+                    <i class="fas fa-terminal" style="color: #D97757;"></i>
+                    <h3>Claude</h3>
+                    <p data-ar="التعامل مع نماذج Claude من Anthropic للتطبيقات المتقدمة" data-en="Working with Claude models from Anthropic for advanced applications">التعامل مع نماذج Claude من Anthropic للتطبيقات المتقدمة</p>
+                </div>
+                <div class="framework-card">
+                    <i class="fas fa-server" style="color: #4285F4;"></i>
+                    <h3 data-ar="نماذج محلية" data-en="Local Models">نماذج محلية</h3>
+                    <p data-ar="تشغيل نماذج مفتوحة المصدر محلياً للخصوصية والتحكم" data-en="Running open-source models locally for privacy and control">تشغيل نماذج مفتوحة المصدر محلياً للخصوصية والتحكم</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Magic Bento Cards Section -->
+    <section class="bento-section">
+        <div class="container">
+            <h2 data-ar="بطاقات تفاعلية" data-en="Interactive Cards">بطاقات تفاعلية</h2>
+            
+            <div class="bento-with-customizer">
+                <!-- Customizer Panel -->
+                <div class="bento-customizer-wrapper">
+                    <div id="magicBentoCustomizer"></div>
+                </div>
+                
+                <!-- Bento Cards -->
+                <div class="bento-cards-wrapper">
+                    <div id="magicBentoContainer"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</h3>
+                    <p data-ar="تعلم البرمجة بطريقة تفاعلية وممتعة" data-en="Learn programming in an interactive and fun way">تعلم البرمجة بطريقة تفاعلية وممتعة</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="الخبرات" data-en="Expertise">الخبرات</h4>
+                    <ul>
+                        <li><a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a></li>
+                        <li><a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a></li>
+                        <li><a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/msr7799" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-ar="© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة." data-en="© 2025 Programming Academy. All rights reserved.">© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/MagicBento.js"></script>
+    <script src="./js/MagicBentoCustomizer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const magicBento = new MagicBento('magicBentoContainer', {
+                textAutoHide: true,
+                enableStars: true,
+                enableSpotlight: true,
+                enableBorderGlow: true,
+                enableTilt: false,
+                enableMagnetism: true,
+                clickEffect: true,
+                spotlightRadius: 300,
+                particleCount: 12,
+                glowColor: '132, 0, 255'
+            });
+            
+            const customizer = new MagicBentoCustomizer('magicBentoCustomizer', magicBento);
+            
+            document.getElementById('langToggle')?.addEventListener('click', function() {
+                setTimeout(() => {
+                    const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                    magicBento.updateLanguage(currentLang);
+                    customizer.updateLanguage(currentLang);
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

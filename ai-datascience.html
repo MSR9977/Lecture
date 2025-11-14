@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الذكاء الاصطناعي وعلم البيانات | AI & Data Science</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/MagicBento.css">
+    <link rel="stylesheet" href="./css/MagicBentoCustomizer.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-code"></i>
+                <span data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</span>
+            </div>
+            <div class="nav-menu">
+                <a href="INDEX.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+                <a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a>
+                <a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a>
+                <a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a>
+                <a href="prompt-engineering.html" data-ar="هندسة التلقين" data-en="Prompt Engineering">هندسة التلقين</a>
+                <a href="cybersecurity.html" data-ar="الأمن السيبراني" data-en="Cybersecurity">الأمن السيبراني</a>
+            </div>
+            <div class="language-toggle">
+                <button id="langToggle" class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                </button>
+            </div>
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div style="flex: 1;">
+                <h1 data-ar="الذكاء الاصطناعي وعلم البيانات" data-en="AI & Data Science">الذكاء الاصطناعي وعلم البيانات</h1>
+                <p data-ar="خبرة سنة ونصف في Python - وصولاً للمعادلات العصبية والشبكات العميقة" data-en="1.5 years Python experience - Advanced to Neural Networks and Deep Learning">خبرة سنة ونصف في Python - وصولاً للمعادلات العصبية والشبكات العميقة</p>
+            </div>
+            <div class="hero-animation">
+                <div class="code-block">
+                    <div class="code-line">import torch</div>
+                    <div class="code-line">model = NeuralNetwork()</div>
+                    <div class="code-line">predictions = model.forward(data)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="التقنيات والمكتبات" data-en="Technologies & Libraries">التقنيات والمكتبات</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <i class="fab fa-python" style="color: #3776AB;"></i>
+                    <h3>Python</h3>
+                    <p data-ar="لغة البرمجة الأساسية للذكاء الاصطناعي وعلم البيانات مع خبرة سنة ونصف" data-en="Primary programming language for AI and Data Science with 1.5 years experience">لغة البرمجة الأساسية للذكاء الاصطناعي وعلم البيانات مع خبرة سنة ونصف</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-fire" style="color: #EE4C2C;"></i>
+                    <h3>PyTorch</h3>
+                    <p data-ar="إطار عمل متقدم لبناء وتدريب الشبكات العصبية العميقة" data-en="Advanced framework for building and training deep neural networks">إطار عمل متقدم لبناء وتدريب الشبكات العصبية العميقة</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-brain"></i>
+                    <h3 data-ar="الشبكات العصبية" data-en="Neural Networks">الشبكات العصبية</h3>
+                    <p data-ar="فهم عميق للمعادلات العصبية وبناء النماذج المعقدة" data-en="Deep understanding of neural equations and building complex models">فهم عميق للمعادلات العصبية وبناء النماذج المعقدة</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3 data-ar="تعلم الآلة" data-en="Machine Learning">تعلم الآلة</h3>
+                    <p data-ar="خوارزميات التعلم الآلي والتعلم العميق والتعلم المعزز" data-en="Machine Learning, Deep Learning, and Reinforcement Learning algorithms">خوارزميات التعلم الآلي والتعلم العميق والتعلم المعزز</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-sliders-h"></i>
+                    <h3 data-ar="ضبط النماذج" data-en="Fine-tuning">ضبط النماذج</h3>
+                    <p data-ar="تخصيص وضبط النماذج المدربة مسبقاً لمهام محددة" data-en="Customizing and fine-tuning pre-trained models for specific tasks">تخصيص وضبط النماذج المدربة مسبقاً لمهام محددة</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 data-ar="تحليل البيانات" data-en="Data Analysis">تحليل البيانات</h3>
+                    <p data-ar="استخراج الرؤى والتنبؤات من البيانات الضخمة" data-en="Extracting insights and predictions from big data">استخراج الرؤى والتنبؤات من البيانات الضخمة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Areas Section -->
+    <section class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="مجالات الخبرة" data-en="Areas of Expertise">مجالات الخبرة</h2>
+            <div class="se-concepts">
+                <div class="se-item">
+                    <i class="fas fa-network-wired"></i>
+                    <h3 data-ar="الشبكات العصبية العميقة" data-en="Deep Neural Networks">الشبكات العصبية العميقة</h3>
+                    <p data-ar="CNN، RNN، LSTM، Transformers وفهم عميق للمعادلات الرياضية وراءها" data-en="CNN, RNN, LSTM, Transformers with deep understanding of underlying mathematics">CNN، RNN، LSTM، Transformers وفهم عميق للمعادلات الرياضية وراءها</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-language"></i>
+                    <h3 data-ar="معالجة اللغات الطبيعية" data-en="Natural Language Processing">معالجة اللغات الطبيعية</h3>
+                    <p data-ar="تطبيقات NLP، التصنيف، التلخيص، والترجمة الآلية" data-en="NLP applications, classification, summarization, and machine translation">تطبيقات NLP، التصنيف، التلخيص، والترجمة الآلية</p>
+                </div>
+                <div class="se-item">
+                    <i class="fas fa-image"></i>
+                    <h3 data-ar="رؤية الحاسوب" data-en="Computer Vision">رؤية الحاسوب</h3>
+                    <p data-ar="التعرف على الصور، الكشف عن الأجسام، وتجزئة الصور" data-en="Image recognition, object detection, and image segmentation">التعرف على الصور، الكشف عن الأجسام، وتجزئة الصور</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Examples Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="أمثلة البرمجة" data-en="Code Examples">أمثلة البرمجة</h2>
+            <div class="programming-concepts">
+                <div class="concept-item">
+                    <h3 data-ar="بناء شبكة عصبية بسيطة" data-en="Building a Simple Neural Network">بناء شبكة عصبية بسيطة</h3>
+                    <div class="code-example">
+                        <code>import torch<br>
+import torch.nn as nn<br><br>
+class NeuralNetwork(nn.Module):<br>
+    def __init__(self):<br>
+        super().__init__()<br>
+        self.linear1 = nn.Linear(784, 128)<br>
+        self.linear2 = nn.Linear(128, 10)<br>
+        self.relu = nn.ReLU()<br>
+    <br>
+    def forward(self, x):<br>
+        x = self.relu(self.linear1(x))<br>
+        return self.linear2(x)</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="تدريب النموذج" data-en="Training the Model">تدريب النموذج</h3>
+                    <div class="code-example">
+                        <code>model = NeuralNetwork()<br>
+criterion = nn.CrossEntropyLoss()<br>
+optimizer = torch.optim.Adam(model.parameters())<br><br>
+for epoch in range(epochs):<br>
+    for batch in dataloader:<br>
+        predictions = model(batch['input'])<br>
+        loss = criterion(predictions, batch['target'])<br>
+        <br>
+        optimizer.zero_grad()<br>
+        loss.backward()<br>
+        optimizer.step()</code>
+                    </div>
+                </div>
+                <div class="concept-item">
+                    <h3 data-ar="ضبط نموذج مدرب مسبقاً" data-en="Fine-tuning a Pre-trained Model">ضبط نموذج مدرب مسبقاً</h3>
+                    <div class="code-example">
+                        <code>from transformers import AutoModelForSequenceClassification<br>
+from transformers import Trainer, TrainingArguments<br><br>
+# تحميل نموذج مدرب مسبقاً<br>
+model = AutoModelForSequenceClassification.from_pretrained(<br>
+    "bert-base-uncased",<br>
+    num_labels=2<br>
+)<br><br>
+# تجميد بعض الطبقات<br>
+for param in model.base_model.parameters():<br>
+    param.requires_grad = False<br><br>
+# تدريب الطبقات الأخيرة فقط</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Platforms Section -->
+    <section class="section alt-bg">
+        <div class="container">
+            <h2 data-ar="الأدوات والمنصات" data-en="Tools & Platforms">الأدوات والمنصات</h2>
+            <div class="frameworks-grid">
+                <div class="framework-card">
+                    <i class="fas fa-laptop-code" style="color: #F9AB00;"></i>
+                    <h3>Google Colab</h3>
+                    <p data-ar="منصة مجانية للتطوير والتدريب على وحدات GPU قوية" data-en="Free platform for development and training on powerful GPU units">منصة مجانية للتطوير والتدريب على وحدات GPU قوية</p>
+                </div>
+                <div class="framework-card">
+                    <i class="fas fa-book-open" style="color: #FF6F00;"></i>
+                    <h3>Jupyter Notebook</h3>
+                    <p data-ar="بيئة تفاعلية لتطوير وتوثيق مشاريع الذكاء الاصطناعي" data-en="Interactive environment for developing and documenting AI projects">بيئة تفاعلية لتطوير وتوثيق مشاريع الذكاء الاصطناعي</p>
+                </div>
+                <div class="framework-card">
+                    <i class="fas fa-database" style="color: #326CE5;"></i>
+                    <h3 data-ar="معالجة البيانات" data-en="Data Processing">معالجة البيانات</h3>
+                    <p data-ar="NumPy، Pandas، Matplotlib للتعامل مع البيانات وتحليلها" data-en="NumPy, Pandas, Matplotlib for data handling and analysis">NumPy، Pandas، Matplotlib للتعامل مع البيانات وتحليلها</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Magic Bento Cards Section -->
+    <section class="bento-section">
+        <div class="container">
+            <h2 data-ar="بطاقات تفاعلية" data-en="Interactive Cards">بطاقات تفاعلية</h2>
+            
+            <div class="bento-with-customizer">
+                <!-- Customizer Panel -->
+                <div class="bento-customizer-wrapper">
+                    <div id="magicBentoCustomizer"></div>
+                </div>
+                
+                <!-- Bento Cards -->
+                <div class="bento-cards-wrapper">
+                    <div id="magicBentoContainer"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</h3>
+                    <p data-ar="تعلم البرمجة بطريقة تفاعلية وممتعة" data-en="Learn programming in an interactive and fun way">تعلم البرمجة بطريقة تفاعلية وممتعة</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="الخبرات" data-en="Expertise">الخبرات</h4>
+                    <ul>
+                        <li><a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a></li>
+                        <li><a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a></li>
+                        <li><a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/msr7799" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-ar="© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة." data-en="© 2025 Programming Academy. All rights reserved.">© 2025 أكاديمية البرمجة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/MagicBento.js"></script>
+    <script src="./js/MagicBentoCustomizer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const magicBento = new MagicBento('magicBentoContainer', {
+                textAutoHide: true,
+                enableStars: true,
+                enableSpotlight: true,
+                enableBorderGlow: true,
+                enableTilt: false,
+                enableMagnetism: true,
+                clickEffect: true,
+                spotlightRadius: 300,
+                particleCount: 12,
+                glowColor: '132, 0, 255'
+            });
+            
+            const customizer = new MagicBentoCustomizer('magicBentoCustomizer', magicBento);
+            
+            document.getElementById('langToggle')?.addEventListener('click', function() {
+                setTimeout(() => {
+                    const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                    magicBento.updateLanguage(currentLang);
+                    customizer.updateLanguage(currentLang);
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

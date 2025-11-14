@@ -1,6 +1,6 @@
 # Deploy URL
 
-[Visit the Page](https://unrivaled-froyo-20472b.netlify.app)
+[Visit the Page](https://lecture-page.netlify.app)
 
 ## Project Description
 

@@ -3,6 +3,10 @@ class MagicBentoCustomizer {
   constructor(containerId, magicBentoInstance) {
     this.container = document.getElementById(containerId);
     this.magicBento = magicBentoInstance;
+    this.magnifierActive = false;
+    
+    // Make this instance globally accessible for long press
+    window.magicBentoCustomizer = this;
     
     if (!this.container) {
       console.error(`Container with id "${containerId}" not found`);
@@ -156,12 +160,13 @@ class MagicBentoCustomizer {
             <span data-ar="لون التوهج" data-en="Glow Color">لون التوهج</span>
           </label>
           <div class="color-presets">
+            <button class="magnifier-toggle" id="magnifierToggle" title="تفعيل العدسة المكبرة"></button>
             <button class="color-preset active" data-color="132, 0, 255" style="background: rgb(132, 0, 255)"></button>
-            <button class="color-preset" data-color="255, 0, 132" style="background: #f83c3cff"></button>
             <button class="color-preset" data-color="0, 255, 132" style="background: rgb(0, 255, 132)"></button>
             <button class="color-preset" data-color="255, 132, 0" style="background: rgb(255, 132, 0)"></button>
             <button class="color-preset" data-color="0, 132, 255" style="background: rgb(0, 132, 255)"></button>
-            <button class="color-preset" data-color="255, 0, 0" style="background: rgba(247, 245, 245, 1)"></button>
+            <button class="color-preset" data-color="255, 0, 0" style="background: rgb(255, 0, 0)"></button>
+            <button class="color-preset" data-color="255, 255, 255" style="background: rgb(255, 255, 255)"></button>
           </div>
         </div>
         
@@ -229,6 +234,92 @@ class MagicBentoCustomizer {
       });
     });
     
+    // Magnifier Toggle Button Event with Long Press
+    const magnifierBtn = document.querySelector('#magnifierToggle');
+    if (magnifierBtn) {
+      let pressTimer = null;
+      let pressStartTime = 0;
+      const longPressDuration = 4000; // 4 seconds
+      
+      // Create progress indicator
+      const progressRing = document.createElement('div');
+      progressRing.className = 'magnifier-progress-ring';
+      magnifierBtn.appendChild(progressRing);
+      
+      // Create feedback text
+      const feedbackText = document.createElement('div');
+      feedbackText.className = 'magnifier-feedback-text';
+      feedbackText.textContent = 'استمر بالضغط...';
+      magnifierBtn.appendChild(feedbackText);
+      
+      const startPress = () => {
+        pressStartTime = Date.now();
+        magnifierBtn.classList.add('pressing');
+        feedbackText.style.opacity = '1';
+        feedbackText.style.transform = 'translateX(-50%) translateY(0)';
+        
+        // Update feedback text based on current state
+        if (this.magnifierActive) {
+          feedbackText.textContent = 'استمر لإيقاف العدسة...';
+        } else {
+          feedbackText.textContent = 'استمر لتفعيل العدسة...';
+        }
+        
+        // Animate progress ring
+        progressRing.style.animation = `fillProgress ${longPressDuration}ms linear forwards`;
+        
+        pressTimer = setTimeout(() => {
+          // Toggle magnifier after 4 seconds
+          this.magnifierActive = !this.magnifierActive;
+          magnifierBtn.classList.toggle('active', this.magnifierActive);
+          magnifierBtn.classList.remove('pressing');
+          progressRing.style.animation = '';
+          feedbackText.style.opacity = '0';
+          feedbackText.style.transform = 'translateX(-50%) translateY(-10px)';
+          
+          // Show success message
+          feedbackText.textContent = this.magnifierActive ? '✓ تم التفعيل!' : '✓ تم الإيقاف!';
+          feedbackText.style.opacity = '1';
+          setTimeout(() => {
+            feedbackText.style.opacity = '0';
+          }, 1500);
+          
+          if (window.magicBento) {
+            window.magicBento.toggleMagnifier(this.magnifierActive);
+          }
+          
+          // Haptic feedback
+          if (navigator.vibrate) {
+            navigator.vibrate([50, 30, 50]);
+          }
+        }, longPressDuration);
+      };
+      
+      const cancelPress = () => {
+        if (pressTimer) {
+          clearTimeout(pressTimer);
+          pressTimer = null;
+        }
+        magnifierBtn.classList.remove('pressing');
+        progressRing.style.animation = '';
+        feedbackText.style.opacity = '0';
+        feedbackText.style.transform = 'translateX(-50%) translateY(-10px)';
+      };
+      
+      // Mouse events
+      magnifierBtn.addEventListener('mousedown', startPress);
+      magnifierBtn.addEventListener('mouseup', cancelPress);
+      magnifierBtn.addEventListener('mouseleave', cancelPress);
+      
+      // Touch events
+      magnifierBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        startPress();
+      });
+      magnifierBtn.addEventListener('touchend', cancelPress);
+      magnifierBtn.addEventListener('touchcancel', cancelPress);
+    }
+    
     // Color Presets
     const colorPresets = document.querySelectorAll('.color-preset');
     colorPresets.forEach(preset => {
@@ -244,6 +335,12 @@ class MagicBentoCustomizer {
     const resetBtn = document.getElementById('resetBtn');
     resetBtn?.addEventListener('click', () => {
       this.resetSettings();
+      this.magnifierActive = false;
+      const magnifierToggle = document.getElementById('magnifierToggle');
+      magnifierToggle?.classList.remove('active');
+      if (this.magicBento && this.magicBento.toggleMagnifier) {
+        this.magicBento.toggleMagnifier(false);
+      }
     });
   }
   
@@ -263,6 +360,11 @@ class MagicBentoCustomizer {
       const currentLang = document.documentElement.getAttribute('lang') || 'ar';
       setTimeout(() => {
         this.magicBento.updateLanguage(currentLang);
+        
+        // Reapply magnifier if it was active
+        if (this.magnifierActive && this.magicBento.toggleMagnifier) {
+          this.magicBento.toggleMagnifier(true);
+        }
       }, 100);
     }
   }

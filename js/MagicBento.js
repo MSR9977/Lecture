@@ -504,6 +504,9 @@ class MagicBento {
     // Setup drag and drop
     this.setupDragAndDrop();
     
+    // Setup global long press for magnifier
+    this.setupGlobalLongPress();
+    
     // Adjust font sizes after grid is rendered
     setTimeout(() => {
       this.adjustFontSizes();
@@ -745,7 +748,352 @@ class MagicBento {
     });
   }
   
+  toggleMagnifier(enabled) {
+    if (!this.gridElement) return;
+    
+    if (enabled) {
+      this.createMagnifierLens();
+    } else {
+      this.removeMagnifierLens();
+    }
+  }
+  
+  createMagnifierLens() {
+    // Create magnifier lens container
+    this.magnifierLens = document.createElement('div');
+    this.magnifierLens.className = 'magnifier-lens';
+    
+    // Create inner magnified content container
+    this.magnifierContent = document.createElement('div');
+    this.magnifierContent.className = 'magnifier-content';
+    this.magnifierLens.appendChild(this.magnifierContent);
+    
+    document.body.appendChild(this.magnifierLens);
+    
+    // Hide default cursor
+    document.body.style.cursor = 'none';
+    
+    // Mouse move handler with minimal throttling for maximum precision
+    let lastUpdate = 0;
+    const throttleDelay = 8; // ~120fps for ultra-smooth updates
+    
+    this.handleMouseMove = (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      // Update lens position immediately (smooth following)
+      this.magnifierLens.style.left = `${x}px`;
+      this.magnifierLens.style.top = `${y}px`;
+      
+      // Throttle content updates for better performance
+      const now = Date.now();
+      if (now - lastUpdate > throttleDelay) {
+        lastUpdate = now;
+        this.updateMagnifiedContent(x, y);
+      }
+    };
+    
+    // Touch move handler
+    this.handleTouchMove = (e) => {
+      const touch = e.touches[0];
+      const x = touch.clientX;
+      const y = touch.clientY;
+      
+      this.magnifierLens.style.left = `${x}px`;
+      this.magnifierLens.style.top = `${y}px`;
+      
+      this.updateMagnifiedContent(x, y);
+    };
+    
+    // Update magnified content method
+    this.updateMagnifiedContent = (x, y) => {
+      // Get element under the lens
+      this.magnifierLens.style.pointerEvents = 'none';
+      const elementBelow = document.elementFromPoint(x, y);
+      this.magnifierLens.style.pointerEvents = 'auto';
+      
+      // Check if hovering over clickable element
+      const isClickable = elementBelow && (
+        elementBelow.tagName === 'BUTTON' ||
+        elementBelow.tagName === 'A' ||
+        elementBelow.tagName === 'INPUT' ||
+        elementBelow.tagName === 'SELECT' ||
+        elementBelow.tagName === 'TEXTAREA' ||
+        elementBelow.onclick ||
+        elementBelow.classList.contains('clickable') ||
+        elementBelow.closest('button') ||
+        elementBelow.closest('a') ||
+        window.getComputedStyle(elementBelow).cursor === 'pointer'
+      );
+      
+      // Show/hide cursor based on clickable element
+      if (isClickable) {
+        document.body.style.cursor = 'pointer';
+        this.magnifierLens.style.opacity = '0.5';
+        this.magnifierLens.style.pointerEvents = 'none';
+      } else {
+        document.body.style.cursor = 'none';
+        this.magnifierLens.style.opacity = '1';
+        this.magnifierLens.style.pointerEvents = 'none';
+      }
+      
+      // Find the best target element to magnify
+      let targetElement = elementBelow;
+      
+      // Try to find a meaningful parent (like a card, section, or container)
+      const card = elementBelow?.closest('.magic-bento-card');
+      const section = elementBelow?.closest('section');
+      const container = elementBelow?.closest('.container');
+      
+      // Prefer card, then section, then container, then the element itself
+      if (card) {
+        targetElement = card;
+      } else if (section) {
+        targetElement = section;
+      } else if (container) {
+        targetElement = container;
+      } else if (!targetElement) {
+        targetElement = document.body;
+      }
+      
+      if (targetElement && targetElement !== this.magnifierLens) {
+        // Get the actual element's bounding rect
+        const targetRect = targetElement.getBoundingClientRect();
+        
+        // Adaptive zoom based on screen size - Higher for more precision
+        const isMobile = window.innerWidth <= 768;
+        const scale = isMobile ? 3.5 : 4.5; // Very high magnification for pixel-perfect detail
+        
+        // Adaptive lens radius based on actual lens size
+        let lensRadius = 125; // Default for 250px lens
+        if (window.innerWidth <= 480) {
+          lensRadius = 60; // 120px / 2
+        } else if (window.innerWidth <= 768) {
+          lensRadius = 85; // 170px / 2
+        }
+        
+        // Calculate exact position relative to target
+        const relativeX = x - targetRect.left;
+        const relativeY = y - targetRect.top;
+        
+        // Clone and magnify
+        const clone = targetElement.cloneNode(true);
+        clone.style.transform = `scale(${scale})`;
+        clone.style.transformOrigin = '0 0';
+        clone.style.position = 'absolute';
+        
+        // Calculate offset to center the exact point under cursor in the lens
+        const offsetX = lensRadius - (relativeX * scale);
+        const offsetY = lensRadius - (relativeY * scale);
+        
+        clone.style.left = `${offsetX}px`;
+        clone.style.top = `${offsetY}px`;
+        clone.style.pointerEvents = 'none';
+        clone.style.width = targetRect.width + 'px';
+        clone.style.height = targetRect.height + 'px';
+        
+        // Clear and update content
+        this.magnifierContent.innerHTML = '';
+        this.magnifierContent.appendChild(clone);
+      } else {
+        this.magnifierContent.innerHTML = '';
+      }
+    };
+    
+    // Add event listeners
+    document.addEventListener('mousemove', this.handleMouseMove);
+    document.addEventListener('touchmove', this.handleTouchMove, { passive: true });
+    
+    // Hide lens when mouse leaves window
+    this.handleMouseLeave = () => {
+      this.magnifierLens.style.opacity = '0';
+    };
+    
+    this.handleMouseEnter = () => {
+      this.magnifierLens.style.opacity = '1';
+    };
+    
+    document.addEventListener('mouseleave', this.handleMouseLeave);
+    document.addEventListener('mouseenter', this.handleMouseEnter);
+  }
+  
+  removeMagnifierLens() {
+    if (this.magnifierLens) {
+      this.magnifierLens.remove();
+      this.magnifierLens = null;
+    }
+    
+    if (this.magnifierContent) {
+      this.magnifierContent = null;
+    }
+    
+    // Restore cursor
+    document.body.style.cursor = '';
+    
+    if (this.handleMouseMove) {
+      document.removeEventListener('mousemove', this.handleMouseMove);
+      this.handleMouseMove = null;
+    }
+    
+    if (this.handleTouchMove) {
+      document.removeEventListener('touchmove', this.handleTouchMove);
+      this.handleTouchMove = null;
+    }
+    
+    if (this.handleMouseLeave) {
+      document.removeEventListener('mouseleave', this.handleMouseLeave);
+      this.handleMouseLeave = null;
+    }
+    
+    if (this.handleMouseEnter) {
+      document.removeEventListener('mouseenter', this.handleMouseEnter);
+      this.handleMouseEnter = null;
+    }
+    
+    if (this.updateMagnifiedContent) {
+      this.updateMagnifiedContent = null;
+    }
+  }
+  
+  setupGlobalLongPress() {
+    let pressTimer = null;
+    let pressStartX = 0;
+    let pressStartY = 0;
+    let hasMoved = false;
+    const longPressDuration = 4000; // 4 seconds
+    const moveThreshold = 15; // pixels
+    
+    // Create global press indicator
+    const pressIndicator = document.createElement('div');
+    pressIndicator.className = 'global-press-indicator';
+    
+    // Add text inside indicator
+    const pressText = document.createElement('div');
+    pressText.className = 'press-indicator-text';
+    pressText.textContent = 'استمر...';
+    pressIndicator.appendChild(pressText);
+    
+    document.body.appendChild(pressIndicator);
+    this.pressIndicator = pressIndicator;
+    this.pressText = pressText;
+    
+    const startGlobalPress = (x, y) => {
+      pressStartX = x;
+      pressStartY = y;
+      hasMoved = false;
+      
+      // Position indicator at press point
+      pressIndicator.style.left = `${x}px`;
+      pressIndicator.style.top = `${y}px`;
+      pressIndicator.classList.add('active');
+      
+      // Update text based on current state
+      const customizer = window.magicBentoCustomizer;
+      if (customizer && customizer.magnifierActive) {
+        pressText.textContent = 'إيقاف';
+        pressText.classList.add('deactivate');
+      } else {
+        pressText.textContent = 'تفعيل';
+        pressText.classList.remove('deactivate');
+      }
+      
+      // Start animation
+      pressIndicator.style.animation = `globalPressExpand ${longPressDuration}ms linear forwards`;
+      
+      pressTimer = setTimeout(() => {
+        // Toggle magnifier after 4 seconds
+        if (customizer) {
+          customizer.magnifierActive = !customizer.magnifierActive;
+          this.toggleMagnifier(customizer.magnifierActive);
+          
+          // Update button state
+          const magnifierBtn = document.querySelector('#magnifierToggle');
+          if (magnifierBtn) {
+            magnifierBtn.classList.toggle('active', customizer.magnifierActive);
+          }
+        }
+        
+        // Success feedback
+        pressIndicator.classList.add('success');
+        pressText.textContent = customizer.magnifierActive ? '✓ فُعِّلت!' : '✓ أُوقِفت!';
+        
+        // Haptic feedback
+        if (navigator.vibrate) {
+          navigator.vibrate([50, 30, 50]);
+        }
+        
+        setTimeout(() => {
+          cancelGlobalPress();
+        }, 800);
+      }, longPressDuration);
+    };
+    
+    const cancelGlobalPress = () => {
+      if (pressTimer) {
+        clearTimeout(pressTimer);
+        pressTimer = null;
+      }
+      pressIndicator.classList.remove('active', 'success');
+      pressIndicator.style.animation = '';
+    };
+    
+    const checkMove = (x, y) => {
+      const deltaX = Math.abs(x - pressStartX);
+      const deltaY = Math.abs(y - pressStartY);
+      if (deltaX > moveThreshold || deltaY > moveThreshold) {
+        hasMoved = true;
+        cancelGlobalPress();
+      }
+    };
+    
+    // Mouse events
+    document.addEventListener('mousedown', (e) => {
+      // Ignore if clicking on interactive elements
+      if (e.target.closest('button, a, input, select, textarea, .switch')) {
+        return;
+      }
+      startGlobalPress(e.clientX, e.clientY);
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+      if (pressTimer) {
+        checkMove(e.clientX, e.clientY);
+      }
+    });
+    
+    document.addEventListener('mouseup', cancelGlobalPress);
+    
+    // Touch events
+    document.addEventListener('touchstart', (e) => {
+      // Ignore if touching interactive elements
+      if (e.target.closest('button, a, input, select, textarea, .switch')) {
+        return;
+      }
+      const touch = e.touches[0];
+      startGlobalPress(touch.clientX, touch.clientY);
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+      if (pressTimer) {
+        const touch = e.touches[0];
+        checkMove(touch.clientX, touch.clientY);
+      }
+    });
+    
+    document.addEventListener('touchend', cancelGlobalPress);
+    document.addEventListener('touchcancel', cancelGlobalPress);
+  }
+  
   destroy() {
+    // Clean up magnifier
+    this.removeMagnifierLens();
+    
+    // Clean up press indicator
+    if (this.pressIndicator) {
+      this.pressIndicator.remove();
+      this.pressIndicator = null;
+    }
+    
     if (this.spotlight) {
       this.spotlight.destroy();
     }

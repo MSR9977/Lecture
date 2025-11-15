@@ -112,23 +112,29 @@ textarea[id*="code"],
 
 .nav-menu {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
 }
 
-.nav-menu a {
+.nav-menu > a,
+.nav-menu .dropdown > a {
     text-decoration: none;
     color: #e0e0e0 !important;
     font-weight: 500;
+    font-size: 0.95rem;
     transition: var(--transition);
     position: relative;
+    padding: 0.5rem 0;
+    white-space: nowrap;
 }
 
-.nav-menu a:hover {
+.nav-menu > a:hover,
+.nav-menu .dropdown > a:hover {
     color: var(--primary-color) !important;
 }
 
-.nav-menu a::after {
+/* Underline effect for regular links */
+.nav-menu > a::before {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -139,8 +145,94 @@ textarea[id*="code"],
     transition: var(--transition);
 }
 
-.nav-menu a:hover::after {
+.nav-menu > a:hover::before {
     width: 100%;
+}
+
+/* Dropdown arrow indicator */
+.dropdown > a::after {
+    content: ' ▾';
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.dropdown:hover > a::after {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #1a1a1a;
+    border: 1px solid #404040;
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    list-style: none;
+    margin: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: #e0e0e0 !important;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.dropdown-menu li a:hover {
+    background: rgba(138, 155, 168, 0.2);
+    color: var(--primary-color) !important;
+    padding-right: 1.5rem;
+}
+
+/* Dropdown Animation */
+.dropdown-menu li {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideIn 0.3s ease forwards;
+}
+
+.dropdown:hover .dropdown-menu li:nth-child(1) { animation-delay: 0.05s; }
+.dropdown:hover .dropdown-menu li:nth-child(2) { animation-delay: 0.1s; }
+.dropdown:hover .dropdown-menu li:nth-child(3) { animation-delay: 0.15s; }
+.dropdown:hover .dropdown-menu li:nth-child(4) { animation-delay: 0.2s; }
+.dropdown:hover .dropdown-menu li:nth-child(5) { animation-delay: 0.25s; }
+.dropdown:hover .dropdown-menu li:nth-child(6) { animation-delay: 0.3s; }
+.dropdown:hover .dropdown-menu li:nth-child(7) { animation-delay: 0.35s; }
+.dropdown:hover .dropdown-menu li:nth-child(8) { animation-delay: 0.4s; }
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .lang-btn {
@@ -1173,9 +1265,53 @@ textarea[id*="code"],
         display: flex;
     }
     
-    .nav-menu a {
+    .nav-menu > a,
+    .nav-menu .dropdown {
+        width: 100%;
+    }
+    
+    .nav-menu > a {
         padding: 1rem;
         border-bottom: 1px solid #404040;
+    }
+    
+    .dropdown {
+        position: relative;
+    }
+    
+    .dropdown > a {
+        padding: 1rem;
+        border-bottom: 1px solid #404040;
+        display: block;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        background: #0f0f0f;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+        max-height: 500px;
+    }
+    
+    .dropdown-menu li {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+    
+    .dropdown-menu li a {
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid #2a2a2a;
     }
     
     .instructor-info {

@@ -209,6 +209,19 @@ textarea[id*="code"],
   }
 }
 
+/* Explicitly disable hover effects on touch devices (mobile/tablet) */
+@media (hover: none) or (pointer: coarse) {
+  .dropdown:hover .dropdown-menu {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateY(-10px) !important;
+  }
+
+  .dropdown:hover > a::after {
+      transform: rotate(0deg) !important;
+  }
+}
+
 .dropdown-menu li {
     padding: 0;
     margin: 0;
@@ -1309,6 +1322,8 @@ textarea[id*="code"],
         padding: 1rem;
         border-top: 1px solid #404040;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        overflow: visible;
     }
     
     .nav-menu.active {
@@ -1327,6 +1342,7 @@ textarea[id*="code"],
     
     .dropdown {
         position: relative;
+        overflow: visible;
     }
     
     .dropdown > a {
@@ -1347,11 +1363,19 @@ textarea[id*="code"],
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        z-index: 1001;
     }
     
-    .dropdown.active .dropdown-menu,
-    .dropdown:hover .dropdown-menu {
+    .dropdown.active .dropdown-menu {
         max-height: 500px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        overflow: visible !important;
+        background: #0f0f0f;
+        border: 1px solid #404040;
     }
     
     .dropdown-menu li {
@@ -1363,6 +1387,16 @@ textarea[id*="code"],
     .dropdown-menu li a {
         padding: 0.75rem 1.5rem;
         border-bottom: 1px solid #2a2a2a;
+        display: block;
+        color: #e0e0e0;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-menu li a:hover {
+        background: rgba(138, 155, 168, 0.2);
+        color: var(--primary-color);
+        padding-right: 2rem;
     }
     
     .instructor-info {

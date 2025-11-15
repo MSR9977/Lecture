@@ -10,8 +10,8 @@ class HamburgerMenu {
         if (this.hamburger) {
             this.hamburger.addEventListener('click', () => this.toggleMenu());
             
-            // Close menu when clicking on a link
-            const navLinks = this.navMenu.querySelectorAll('a');
+            // Close menu when clicking on a link (but NOT dropdown links)
+            const navLinks = this.navMenu.querySelectorAll('a:not(.dropdown > a)');
             navLinks.forEach(link => {
                 link.addEventListener('click', () => this.closeMenu());
             });
@@ -33,8 +33,9 @@ class HamburgerMenu {
 class DropdownMenu {
     constructor() {
         this.dropdowns = document.querySelectorAll('.dropdown');
-        // initial detection: true إذا الجهاز يدعم hover (desktop)
-        this.isHoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        // كشف أدق للأجهزة التي تدعم hover
+        // استخدم window.innerWidth كـ fallback إضافي
+        this.isHoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches && window.innerWidth > 768;
         this.init();
         // إعادة التهيئة لو تغير حجم الشاشة / تغير خصائص الإدخال
         window.addEventListener('resize', () => this.handleResize());
@@ -55,7 +56,6 @@ class DropdownMenu {
                 // ربط الحدث مع التحقق داخل المعالج
                 const handler = (e) => {
                     // إذا الجهاز يدعم hover (desktop) فلا نتعامل مع click كـ toggle
-                    // (يمكنك تغيير هذا لو تريد أن click يعمل أيضاً كfallback على desktop)
                     if (this.isHoverable) {
                         return; // اترك الـ hover (CSS) يفعل عمله على الشاشات الكبيرة
                     }
@@ -73,16 +73,18 @@ class DropdownMenu {
             }
         });
 
-        // إغلاق القوائم عند النقر خارجها
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.dropdown')) {
-                this.closeAllDropdowns();
-            }
-        }, true);
+        // إغلاق القوائم عند النقر خارجها (فقط على الأجهزة بدون hover)
+        if (!this.isHoverable) {
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown')) {
+                    this.closeAllDropdowns();
+                }
+            }, true);
+        }
     }
 
     handleResize() {
-        const nowHoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const nowHoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches && window.innerWidth > 768;
         if (nowHoverable !== this.isHoverable) {
             this.isHoverable = nowHoverable;
             // إعادة تهيئة الوصول لربط/فكّ الأحداث حسب الحاجة
@@ -94,15 +96,15 @@ class DropdownMenu {
         const dropdownLink = dropdown.querySelector('a');
         const isActive = dropdown.classList.contains('active');
 
-        // أغلق الكل أولاً
-        this.closeAllDropdowns();
-
-        if (!isActive) {
-            dropdown.classList.add('active');
-            if (dropdownLink) dropdownLink.setAttribute('aria-expanded', 'true');
-        } else {
+        // إذا كان هذا الـ dropdown مفتوحاً بالفعل، أغلقه
+        if (isActive) {
             dropdown.classList.remove('active');
             if (dropdownLink) dropdownLink.setAttribute('aria-expanded', 'false');
+        } else {
+            // وإلا، أغلق الكل أولاً ثم افتح هذا الواحد
+            this.closeAllDropdowns();
+            dropdown.classList.add('active');
+            if (dropdownLink) dropdownLink.setAttribute('aria-expanded', 'true');
         }
     }
 
@@ -301,8 +303,14 @@ class SmoothScroll {
         const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
                 const targetId = link.getAttribute('href');
+                
+                // تجنب معالجة الروابط الفارغة أو التي تحتوي على # فقط
+                if (!targetId || targetId === '#' || targetId.length <= 1) {
+                    return;
+                }
+                
+                e.preventDefault();
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {

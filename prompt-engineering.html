@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>هندسة التلقين والذكاء الاصطناعي | Prompt Engineering & AI</title>
+    <link rel="favicon" href="./assets/favicon.ico">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/MagicBento.css">
     <link rel="stylesheet" href="./css/MagicBentoCustomizer.css">
@@ -20,12 +21,46 @@
                 <span data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</span>
             </div>
             <div class="nav-menu">
-                <a href="INDEX.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
-                <a href="web-development.html" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</a>
-                <a href="mobile-development.html" data-ar="تطوير المحمول" data-en="Mobile Development">تطوير المحمول</a>
-                <a href="ai-datascience.html" data-ar="الذكاء الاصطناعي" data-en="AI & Data Science">الذكاء الاصطناعي</a>
-                <a href="prompt-engineering.html" data-ar="هندسة التلقين" data-en="Prompt Engineering">هندسة التلقين</a>
-                <a href="cybersecurity.html" data-ar="الأمن السيبراني" data-en="Cybersecurity">الأمن السيبراني</a>
+                <!-- المقدمة -->
+                <a href="INDEX.html#intro" data-ar="المقدمة" data-en="Introduction">المقدمة</a>
+                
+                <!-- تطبيقات الويب -->
+                <a href="web-development.html" data-ar="تطبيقات الويب" data-en="Web Apps">تطبيقات الويب</a>
+                
+                <!-- تطبيقات الهاتف -->
+                <a href="mobile-development.html" data-ar="تطبيقات الهاتف" data-en="Phone Apps">تطبيقات الهاتف</a>
+                
+                <!-- الذكاء الاصطناعي وعلم البيانات -->
+                <a href="ai-datascience.html" data-ar="الذكاء الاصطناعي وعلم البيانات" data-en="AI & Data Science">الذكاء الاصطناعي وعلم البيانات</a>
+
+                <!-- Dropdown: الإطارات -->
+                <div class="dropdown">
+                    <a href="#" data-ar="الإطارات" data-en="Frameworks">الإطارات</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="react.html" data-ar="React" data-en="React">React</a></li>
+                        <li><a href="#node" data-ar="Node" data-en="Node">Node</a></li>
+                        <li><a href="typescript.html" data-ar="TypeScript" data-en="TypeScript">TypeScript</a></li>
+                        <li><a href="python.html" data-ar="Python" data-en="Python">Python</a></li>
+                        <li><a href="dart.html" data-ar="Dart & Flutter" data-en="Dart & Flutter">Dart & Flutter</a></li>
+                        <li><a href="swift.html" data-ar="Swift" data-en="Swift">Swift</a></li>
+                        <li><a href="kotlin.html" data-ar="Kotlin" data-en="Kotlin">Kotlin</a></li>
+                        <li><a href="go.html" data-ar="Go" data-en="Go">Go</a></li>
+                    </ul>
+                </div>
+
+                <!-- Dropdown: التنسيق المتقدم -->
+                <div class="dropdown">
+                    <a href="#" data-ar="التنسيق المتقدم" data-en="Advanced CSS">التنسيق المتقدم</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tailwind.html" data-ar="Tailwind CSS" data-en="Tailwind CSS">Tailwind CSS</a></li>
+                        <li><a href="bootstrap.html" data-ar="Bootstrap" data-en="Bootstrap">Bootstrap</a></li>
+                        <li><a href="bulma.html" data-ar="Bulma" data-en="Bulma">Bulma</a></li>
+                        <li><a href="material.html" data-ar="Materialize" data-en="Materialize">Materialize</a></li>
+                        <li><a href="motion.html" data-ar="Motion" data-en="Motion">Motion</a></li>
+                        <li><a href="flexbox.html" data-ar="Flexbox" data-en="Flexbox">Flexbox</a></li>
+                        <li><a href="grid.html" data-ar="Grid" data-en="Grid">Grid</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="language-toggle">
                 <button id="langToggle" class="lang-btn">
@@ -241,9 +276,9 @@ Response:<br>
         </div>
     </footer>
 
-    <script src="./js/script.js"></script>
-    <script src="./js/MagicBento.js"></script>
-    <script src="./js/MagicBentoCustomizer.js"></script>
+    <script src="./js/script.js" defer></script>
+    <script src="./js/MagicBento.js" defer></script>
+    <script src="./js/MagicBentoCustomizer.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const magicBento = new MagicBento('magicBentoContainer', {

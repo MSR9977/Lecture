@@ -197,10 +197,15 @@ class InteractiveDemo {
         this.animateBtn = document.getElementById('animate');
         this.resetBtn = document.getElementById('resetDemo');
         
-        this.bindEvents();
+        // تحقق من وجود العناصر قبل ربط الأحداث
+        if (this.demoArea && this.changeColorBtn && this.addElementBtn && this.animateBtn && this.resetBtn) {
+            this.bindEvents();
+        }
     }
 
     bindEvents() {
+        if (!this.changeColorBtn) return; // تحقق إضافي للأمان
+        
         this.changeColorBtn.addEventListener('click', () => {
             this.changeColors();
         });
@@ -561,11 +566,14 @@ class ReadingProgress {
 
     init() {
         window.addEventListener('scroll', () => {
+            const progressBar = document.getElementById('reading-progress');
+            if (!progressBar) return; // لا تفعل شيء إذا لم يكن هناك progress bar
+            
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             
-            document.getElementById('reading-progress').style.width = scrolled + '%';
+            progressBar.style.width = scrolled + '%';
         });
     }
 }
@@ -1212,11 +1220,17 @@ class CodeEditor {
         this.zoomOutBtn = document.getElementById('zoomOut');
         this.editorTabs = document.querySelectorAll('.editor-tab');
 
-        this.bindEvents();
-        this.renderPreview();
+        // تحقق من وجود العناصر الأساسية قبل الربط
+        if (this.htmlCode && this.cssCode && this.javascriptCode && this.previewFrame) {
+            this.bindEvents();
+            this.renderPreview();
+        }
     }
 
     bindEvents() {
+        // تحقق من وجود العناصر قبل الربط
+        if (!this.htmlCode) return;
+        
         // Tab switching
         this.editorTabs.forEach(tab => {
             tab.addEventListener('click', (e) => {
@@ -1225,23 +1239,31 @@ class CodeEditor {
         });
 
         // Zoom buttons
-        this.zoomInBtn.addEventListener('click', () => {
-            this.zoomIn();
-        });
+        if (this.zoomInBtn) {
+            this.zoomInBtn.addEventListener('click', () => {
+                this.zoomIn();
+            });
+        }
 
-        this.zoomOutBtn.addEventListener('click', () => {
-            this.zoomOut();
-        });
+        if (this.zoomOutBtn) {
+            this.zoomOutBtn.addEventListener('click', () => {
+                this.zoomOut();
+            });
+        }
 
         // Run button
-        this.runBtn.addEventListener('click', () => {
-            this.renderPreview();
-        });
+        if (this.runBtn) {
+            this.runBtn.addEventListener('click', () => {
+                this.renderPreview();
+            });
+        }
 
         // Reset button
-        this.resetBtn.addEventListener('click', () => {
-            this.resetCode();
-        });
+        if (this.resetBtn) {
+            this.resetBtn.addEventListener('click', () => {
+                this.resetCode();
+            });
+        }
 
         // Auto-run on code change (optional - commented for better performance)
         // this.htmlCode.addEventListener('input', () => this.renderPreview());
@@ -1314,6 +1336,8 @@ class CodeEditor {
     }
 
     renderPreview() {
+        if (!this.previewFrame || !this.htmlCode || !this.cssCode || !this.javascriptCode) return;
+        
         const html = this.htmlCode.value;
         const css = this.cssCode.value;
         const javascript = this.javascriptCode.value;
@@ -1350,6 +1374,8 @@ class CodeEditor {
     }
 
     resetCode() {
+        if (!this.htmlCode || !this.cssCode || !this.javascriptCode) return;
+        
         this.htmlCode.value = `<!-- النسخة العربية -->
 <div class="container-arabic">
   <h1>مرحبا بك</h1>

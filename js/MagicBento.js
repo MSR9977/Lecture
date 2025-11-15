@@ -361,12 +361,28 @@ class GlobalSpotlight {
       transform: translate(-50%, -50%);
       mix-blend-mode: screen;
       transition: opacity 0.3s ease, left 0.1s ease, top 0.1s ease;
+      will-change: opacity, transform;
     `;
     document.body.appendChild(this.spotlight);
     
-    // Event listeners
-    document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-    document.addEventListener('mouseleave', () => this.handleMouseLeave());
+    // Throttled mouse move handler for better performance
+    const throttledMouseMove = this.throttle((e) => this.handleMouseMove(e), 16); // ~60fps
+    
+    // Event listeners with passive option
+    document.addEventListener('mousemove', throttledMouseMove, { passive: true });
+    document.addEventListener('mouseleave', () => this.handleMouseLeave(), { passive: true });
+  }
+  
+  // Throttle utility for performance
+  throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
   }
   
   handleMouseMove(e) {
@@ -793,6 +809,9 @@ class MagicBento {
   }
   
   createMagnifierLens() {
+    // Allow magnifier on mobile but with reduced performance impact
+    // User explicitly requested it, so we'll optimize instead of disable
+    
     // Create magnifier lens container
     this.magnifierLens = document.createElement('div');
     this.magnifierLens.className = 'magnifier-lens';

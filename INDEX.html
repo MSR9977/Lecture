@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="./css/MagicBento.css">
     <link rel="stylesheet" href="./css/MagicBentoCustomizer.css">
     <link rel="stylesheet" href="./css/ExamplesCards.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <!-- Tailwind CSS removed for better mobile performance - use only if needed -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 <body>
     <!-- Navigation -->
@@ -749,10 +752,10 @@ if (englishBtn) {
         </div>
     </footer>
 
-    <script src="./js/script.js"></script>
-    <script src="./js/MagicBento.js"></script>
-    <script src="./js/MagicBentoCustomizer.js"></script>
-    <script src="./js/ExamplesCards.js"></script>
+    <script src="./js/script.js" defer></script>
+    <script src="./js/MagicBento.js" defer></script>
+    <script src="./js/MagicBentoCustomizer.js" defer></script>
+    <script src="./js/ExamplesCards.js" defer></script>
     <script>
         // Initialize Magic Bento with Customizer
         document.addEventListener('DOMContentLoaded', function() {

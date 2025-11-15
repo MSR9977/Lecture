@@ -214,37 +214,68 @@ class SmoothScroll {
     }
 }
 
-// Scroll Animation Observer
+// Scroll Animation Observer - Optimized with lazy loading
 class ScrollAnimations {
     constructor() {
+        this.observedCount = 0;
+        this.maxObserved = isMobileDevice ? 30 : 100; // More on desktop
+        this.batchSize = 10; // Load in batches
         this.init();
     }
 
     init() {
+        // Optimized IntersectionObserver with better performance
         this.observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
+                    // Use requestAnimationFrame for smooth animations
+                    requestAnimationFrame(() => {
+                        entry.target.classList.add('animate-in');
+                    });
+                    // Unobserve after animation to reduce overhead
+                    this.observer.unobserve(entry.target);
+                    this.observedCount--;
+                    
+                    // Load more elements if available
+                    if (this.observedCount < this.batchSize) {
+                        this.loadNextBatch();
+                    }
                 }
             });
         }, {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: isMobileDevice ? '0px 0px -100px 0px' : '0px 0px -50px 0px' // Larger margin on mobile
         });
 
-        this.observeElements();
         this.addAnimationStyles();
+        // Start loading elements lazily
+        PerformanceUtils.idleCallback(() => {
+            this.observeElements();
+        });
     }
 
     observeElements() {
-        const elementsToAnimate = document.querySelectorAll(
+        this.elementsToAnimate = document.querySelectorAll(
             '.content-card, .concept-item, .se-item, .selector-item, .function-item, .framework-card'
         );
         
-        elementsToAnimate.forEach(element => {
-            element.classList.add('animate-on-scroll');
-            this.observer.observe(element);
-        });
+        // Load first batch
+        this.loadNextBatch();
+    }
+    
+    loadNextBatch() {
+        if (!this.elementsToAnimate) return;
+        const startIndex = this.observedCount;
+        const endIndex = Math.min(startIndex + this.batchSize, this.elementsToAnimate.length);
+        
+        for (let i = startIndex; i < endIndex; i++) {
+            const element = this.elementsToAnimate[i];
+            if (element && !element.classList.contains('animate-on-scroll')) {
+                element.classList.add('animate-on-scroll');
+                this.observer.observe(element);
+                this.observedCount++;
+            }
+        }
     }
 
     addAnimationStyles() {
@@ -735,54 +766,128 @@ rippleStyle.textContent = `
 `;
 document.head.appendChild(rippleStyle);
 
-// Initialize all components when DOM is loaded
+// Performance optimization utilities
+const PerformanceUtils = {
+    // Debounce function for limiting function calls
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+    
+    // Throttle function for limiting function calls
+    throttle(func, limit) {
+        let inThrottle;
+        return function(...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    },
+    
+    // Use requestIdleCallback with fallback
+    idleCallback(callback) {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(callback, { timeout: 2000 });
+        } else {
+            setTimeout(callback, 1);
+        }
+    },
+    
+    // Lazy initialize component
+    lazyInit(componentClass, delay = 0) {
+        if (delay > 0) {
+            setTimeout(() => new componentClass(), delay);
+        } else {
+            this.idleCallback(() => new componentClass());
+        }
+    }
+};
+
+// Detect mobile device for adaptive performance
+const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+
+// Initialize all components with smart loading
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all components
+    // Essential components - load immediately
     new HamburgerMenu();
     new LanguageManager();
-    new InteractiveDemo();
     new SmoothScroll();
-    new ScrollAnimations();
-    new CodeHighlighter();
     new NavbarScrollEffect();
-    new ReadingProgress();
-    new TechSkillsInteraction();
-    new EditorResizer();
-    new CodeEditor();
-    new MagicBentoCards();
     
-    // Add some interactive effects
-    addHoverEffects();
-    addClickEffects();
+    // Heavy components - load with lazy initialization
+    // Use requestIdleCallback for non-critical components
+    PerformanceUtils.idleCallback(() => {
+        new InteractiveDemo();
+        new ScrollAnimations();
+        new CodeHighlighter();
+        new ReadingProgress();
+        new TechSkillsInteraction();
+        new EditorResizer();
+        new CodeEditor();
+        new MagicBentoCards();
+        
+        // Add interactive effects with delay
+        setTimeout(() => {
+            addHoverEffects();
+            addClickEffects();
+        }, 100);
+    });
     
     console.log('🚀 موقع البرمجة التفاعلي جاهز!');
-    console.log('🎯 جميع الميزات التفاعلية تعمل بنجاح');
-    console.log('💼 قسم الخبرات التقنية تم تفعيله بنجاح');
 });
 
-// Additional Interactive Effects
+// Additional Interactive Effects - Optimized with event delegation
 function addHoverEffects() {
-    const cards = document.querySelectorAll('.content-card, .framework-card, .se-item');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
+    // Use event delegation for better performance
+    const container = document.body;
+    
+    // Throttled hover handler
+    const handleHover = PerformanceUtils.throttle((e) => {
+        const card = e.target.closest('.content-card, .framework-card, .se-item');
+        if (!card) return;
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
+        if (e.type === 'mouseenter') {
+            requestAnimationFrame(() => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+                card.style.transition = 'transform 0.3s ease';
+            });
+        } else if (e.type === 'mouseleave') {
+            requestAnimationFrame(() => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        }
+    }, 16); // ~60fps
+    
+    // Use passive listeners and event delegation
+    container.addEventListener('mouseenter', handleHover, { passive: true, capture: true });
+    container.addEventListener('mouseleave', handleHover, { passive: true, capture: true });
 }
 
 function addClickEffects() {
-    const buttons = document.querySelectorAll('button, .cta-btn');
-    buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
+    // Use event delegation for better performance
+    const container = document.body;
+    
+    // Optimized click handler with event delegation
+    const handleClick = (e) => {
+        const button = e.target.closest('button, .cta-btn');
+        if (!button) return;
+        
+        // Use requestAnimationFrame for smooth animation
+        requestAnimationFrame(() => {
             const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
+            const rect = button.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
+            const x = (e.clientX || e.touches?.[0]?.clientX || 0) - rect.left - size / 2;
+            const y = (e.clientY || e.touches?.[0]?.clientY || 0) - rect.top - size / 2;
             
             ripple.style.cssText = `
                 position: absolute;
@@ -795,17 +900,28 @@ function addClickEffects() {
                 transform: scale(0);
                 animation: ripple 0.6s linear;
                 pointer-events: none;
+                z-index: 1000;
             `;
             
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
+            // Ensure button has proper positioning
+            if (getComputedStyle(button).position === 'static') {
+                button.style.position = 'relative';
+            }
+            button.style.overflow = 'hidden';
+            button.appendChild(ripple);
             
+            // Clean up after animation
             setTimeout(() => {
-                ripple.remove();
+                if (ripple.parentNode) {
+                    ripple.remove();
+                }
             }, 600);
         });
-    });
+    };
+    
+    // Use passive listeners for better scroll performance
+    container.addEventListener('click', handleClick, { passive: true });
+    container.addEventListener('touchend', handleClick, { passive: true });
     
     // Add ripple animation
     const style = document.createElement('style');

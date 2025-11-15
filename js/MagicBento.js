@@ -609,13 +609,24 @@ class MagicBento {
   setupResizeObserver() {
     if (!this.gridElement || !window.ResizeObserver) return;
     
-    // Observe card size changes
+    // Throttle resize observer for better performance on mobile
+    let resizeTimeout = null;
+    const throttleDelay = this.isMobile ? 300 : 100; // Longer delay on mobile
+    
     const resizeObserver = new ResizeObserver(() => {
-      this.adjustFontSizes();
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = setTimeout(() => {
+        this.adjustFontSizes();
+      }, throttleDelay);
     });
     
     const cards = this.gridElement.querySelectorAll('.magic-bento-card');
     cards.forEach(card => resizeObserver.observe(card));
+    
+    // Store observer for cleanup
+    this.resizeObserver = resizeObserver;
   }
   
   setupDragAndDrop() {
@@ -672,7 +683,10 @@ class MagicBento {
         }
       });
       
-      // Touch events for mobile
+      // Touch events for mobile with throttling for better performance
+      let touchMoveLastUpdate = 0;
+      const touchThrottleDelay = 50; // Throttle touch move events on mobile
+      
       card.addEventListener('touchstart', (e) => {
         draggedElement = card;
         touchStartX = e.touches[0].clientX;
@@ -682,6 +696,13 @@ class MagicBento {
       
       card.addEventListener('touchmove', (e) => {
         if (!draggedElement) return;
+        
+        // Throttle touch move for better performance
+        const now = Date.now();
+        if (now - touchMoveLastUpdate < touchThrottleDelay) {
+          return;
+        }
+        touchMoveLastUpdate = now;
         
         const touchX = e.touches[0].clientX;
         const touchY = e.touches[0].clientY;
@@ -746,6 +767,19 @@ class MagicBento {
       if (title) title.textContent = title.getAttribute(`data-${lang}`);
       if (description) description.textContent = description.getAttribute(`data-${lang}`);
     });
+    
+    // Update press indicator text if it exists
+    if (this.pressText) {
+      const translations = {
+        ar: { hold: 'استمر...', activate: 'تفعيل', deactivate: 'إيقاف', activated: '✓ فُعِّلت!', deactivated: '✓ أُوقِفت!' },
+        en: { hold: 'Hold...', activate: 'Activate', deactivate: 'Deactivate', activated: '✓ Activated!', deactivated: '✓ Deactivated!' }
+      };
+      
+      // Only update if not in active state
+      if (!this.pressIndicator || !this.pressIndicator.classList.contains('active')) {
+        this.pressText.textContent = translations[lang].hold;
+      }
+    }
   }
   
   toggleMagnifier(enabled) {
@@ -773,9 +807,10 @@ class MagicBento {
     // Hide default cursor
     document.body.style.cursor = 'none';
     
-    // Mouse move handler with minimal throttling for maximum precision
+    // Adaptive throttling based on device type for better performance
+    const isMobile = window.innerWidth <= 768;
     let lastUpdate = 0;
-    const throttleDelay = 8; // ~120fps for ultra-smooth updates
+    const throttleDelay = isMobile ? 50 : 8; // Much longer delay on mobile (20fps vs 120fps)
     
     this.handleMouseMove = (e) => {
       const x = e.clientX;
@@ -793,16 +828,23 @@ class MagicBento {
       }
     };
     
-    // Touch move handler
+    // Touch move handler with throttling for mobile
+    let touchLastUpdate = 0;
     this.handleTouchMove = (e) => {
       const touch = e.touches[0];
       const x = touch.clientX;
       const y = touch.clientY;
       
+      // Update position immediately
       this.magnifierLens.style.left = `${x}px`;
       this.magnifierLens.style.top = `${y}px`;
       
-      this.updateMagnifiedContent(x, y);
+      // Throttle content updates on mobile
+      const now = Date.now();
+      if (now - touchLastUpdate > throttleDelay) {
+        touchLastUpdate = now;
+        this.updateMagnifiedContent(x, y);
+      }
     };
     
     // Update magnified content method
@@ -860,9 +902,9 @@ class MagicBento {
         // Get the actual element's bounding rect
         const targetRect = targetElement.getBoundingClientRect();
         
-        // Adaptive zoom based on screen size - Higher for more precision
+        // Adaptive zoom based on screen size - Lower on mobile for better performance
         const isMobile = window.innerWidth <= 768;
-        const scale = isMobile ? 3.5 : 4.5; // Very high magnification for pixel-perfect detail
+        const scale = isMobile ? 2.5 : 4.5; // Reduced magnification on mobile
         
         // Adaptive lens radius based on actual lens size
         let lensRadius = 125; // Default for 250px lens
@@ -876,25 +918,28 @@ class MagicBento {
         const relativeX = x - targetRect.left;
         const relativeY = y - targetRect.top;
         
-        // Clone and magnify
-        const clone = targetElement.cloneNode(true);
-        clone.style.transform = `scale(${scale})`;
-        clone.style.transformOrigin = '0 0';
-        clone.style.position = 'absolute';
-        
-        // Calculate offset to center the exact point under cursor in the lens
-        const offsetX = lensRadius - (relativeX * scale);
-        const offsetY = lensRadius - (relativeY * scale);
-        
-        clone.style.left = `${offsetX}px`;
-        clone.style.top = `${offsetY}px`;
-        clone.style.pointerEvents = 'none';
-        clone.style.width = targetRect.width + 'px';
-        clone.style.height = targetRect.height + 'px';
-        
-        // Clear and update content
-        this.magnifierContent.innerHTML = '';
-        this.magnifierContent.appendChild(clone);
+        // Use requestAnimationFrame for smoother updates
+        requestAnimationFrame(() => {
+          // Clone and magnify (only when needed)
+          const clone = targetElement.cloneNode(true);
+          clone.style.transform = `scale(${scale})`;
+          clone.style.transformOrigin = '0 0';
+          clone.style.position = 'absolute';
+          
+          // Calculate offset to center the exact point under cursor in the lens
+          const offsetX = lensRadius - (relativeX * scale);
+          const offsetY = lensRadius - (relativeY * scale);
+          
+          clone.style.left = `${offsetX}px`;
+          clone.style.top = `${offsetY}px`;
+          clone.style.pointerEvents = 'none';
+          clone.style.width = targetRect.width + 'px';
+          clone.style.height = targetRect.height + 'px';
+          
+          // Clear and update content
+          this.magnifierContent.innerHTML = '';
+          this.magnifierContent.appendChild(clone);
+        });
       } else {
         this.magnifierContent.innerHTML = '';
       }
@@ -963,19 +1008,70 @@ class MagicBento {
     const longPressDuration = 4000; // 4 seconds
     const moveThreshold = 15; // pixels
     
+    // Helper function to get current language
+    const getCurrentLanguage = () => {
+      return document.documentElement.getAttribute('lang') || 'ar';
+    };
+    
+    // Translation texts
+    const translations = {
+      ar: {
+        hold: 'استمر...',
+        activate: 'تفعيل',
+        deactivate: 'إيقاف',
+        activated: '✓ فُعِّلت!',
+        deactivated: '✓ أُوقِفت!'
+      },
+      en: {
+        hold: 'Hold...',
+        activate: 'Activate',
+        deactivate: 'Deactivate',
+        activated: '✓ Activated!',
+        deactivated: '✓ Deactivated!'
+      }
+    };
+    
     // Create global press indicator
     const pressIndicator = document.createElement('div');
     pressIndicator.className = 'global-press-indicator';
     
-    // Add text inside indicator
+    // Add text inside indicator with data attributes for translation
     const pressText = document.createElement('div');
     pressText.className = 'press-indicator-text';
-    pressText.textContent = 'استمر...';
+    pressText.setAttribute('data-ar', 'استمر...');
+    pressText.setAttribute('data-en', 'Hold...');
+    pressText.textContent = translations[getCurrentLanguage()].hold;
     pressIndicator.appendChild(pressText);
     
     document.body.appendChild(pressIndicator);
     this.pressIndicator = pressIndicator;
     this.pressText = pressText;
+    
+    // Function to update text based on language
+    const updatePressText = (type) => {
+      const lang = getCurrentLanguage();
+      const texts = translations[lang];
+      
+      switch(type) {
+        case 'hold':
+          pressText.textContent = texts.hold;
+          break;
+        case 'activate':
+          pressText.textContent = texts.activate;
+          pressText.classList.remove('deactivate');
+          break;
+        case 'deactivate':
+          pressText.textContent = texts.deactivate;
+          pressText.classList.add('deactivate');
+          break;
+        case 'activated':
+          pressText.textContent = texts.activated;
+          break;
+        case 'deactivated':
+          pressText.textContent = texts.deactivated;
+          break;
+      }
+    };
     
     const startGlobalPress = (x, y) => {
       pressStartX = x;
@@ -987,14 +1083,12 @@ class MagicBento {
       pressIndicator.style.top = `${y}px`;
       pressIndicator.classList.add('active');
       
-      // Update text based on current state
+      // Update text based on current state and language
       const customizer = window.magicBentoCustomizer;
       if (customizer && customizer.magnifierActive) {
-        pressText.textContent = 'إيقاف';
-        pressText.classList.add('deactivate');
+        updatePressText('deactivate');
       } else {
-        pressText.textContent = 'تفعيل';
-        pressText.classList.remove('deactivate');
+        updatePressText('activate');
       }
       
       // Start animation
@@ -1015,7 +1109,7 @@ class MagicBento {
         
         // Success feedback
         pressIndicator.classList.add('success');
-        pressText.textContent = customizer.magnifierActive ? '✓ فُعِّلت!' : '✓ أُوقِفت!';
+        updatePressText(customizer.magnifierActive ? 'activated' : 'deactivated');
         
         // Haptic feedback
         if (navigator.vibrate) {
@@ -1092,6 +1186,12 @@ class MagicBento {
     if (this.pressIndicator) {
       this.pressIndicator.remove();
       this.pressIndicator = null;
+    }
+    
+    // Clean up resize observer
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
     }
     
     if (this.spotlight) {

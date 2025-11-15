@@ -160,7 +160,7 @@ class MagicBentoCustomizer {
             <span data-ar="لون التوهج" data-en="Glow Color">لون التوهج</span>
           </label>
           <div class="color-presets">
-            <button class="magnifier-toggle" id="magnifierToggle" title="تفعيل العدسة المكبرة"></button>
+            <button class="magnifier-toggle" id="magnifierToggle" data-ar-title="تفعيل العدسة المكبرة" data-en-title="Toggle Magnifier Lens"></button>
             <button class="color-preset active" data-color="132, 0, 255" style="background: rgb(132, 0, 255)"></button>
             <button class="color-preset" data-color="0, 255, 132" style="background: rgb(0, 255, 132)"></button>
             <button class="color-preset" data-color="255, 132, 0" style="background: rgb(255, 132, 0)"></button>
@@ -234,90 +234,46 @@ class MagicBentoCustomizer {
       });
     });
     
-    // Magnifier Toggle Button Event with Long Press
+    // Magnifier Toggle Button - Simple Click Toggle
     const magnifierBtn = document.querySelector('#magnifierToggle');
     if (magnifierBtn) {
-      let pressTimer = null;
-      let pressStartTime = 0;
-      const longPressDuration = 4000; // 4 seconds
+      // Update button title based on current language
+      const updateButtonTitle = () => {
+        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+        const titleAttr = currentLang === 'ar' ? 'data-ar-title' : 'data-en-title';
+        const title = magnifierBtn.getAttribute(titleAttr) || '';
+        magnifierBtn.setAttribute('title', title);
+      };
       
-      // Create progress indicator
-      const progressRing = document.createElement('div');
-      progressRing.className = 'magnifier-progress-ring';
-      magnifierBtn.appendChild(progressRing);
+      // Initial title update
+      updateButtonTitle();
       
-      // Create feedback text
-      const feedbackText = document.createElement('div');
-      feedbackText.className = 'magnifier-feedback-text';
-      feedbackText.textContent = 'استمر بالضغط...';
-      magnifierBtn.appendChild(feedbackText);
-      
-      const startPress = () => {
-        pressStartTime = Date.now();
-        magnifierBtn.classList.add('pressing');
-        feedbackText.style.opacity = '1';
-        feedbackText.style.transform = 'translateX(-50%) translateY(0)';
+      // Toggle magnifier on click
+      magnifierBtn.addEventListener('click', () => {
+        this.magnifierActive = !this.magnifierActive;
+        magnifierBtn.classList.toggle('active', this.magnifierActive);
         
-        // Update feedback text based on current state
+        // Update title based on state and language
+        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
         if (this.magnifierActive) {
-          feedbackText.textContent = 'استمر لإيقاف العدسة...';
+          magnifierBtn.setAttribute('title', currentLang === 'ar' ? 'إيقاف العدسة المكبرة' : 'Deactivate Magnifier Lens');
         } else {
-          feedbackText.textContent = 'استمر لتفعيل العدسة...';
+          magnifierBtn.setAttribute('title', currentLang === 'ar' ? 'تفعيل العدسة المكبرة' : 'Activate Magnifier Lens');
         }
         
-        // Animate progress ring
-        progressRing.style.animation = `fillProgress ${longPressDuration}ms linear forwards`;
-        
-        pressTimer = setTimeout(() => {
-          // Toggle magnifier after 4 seconds
-          this.magnifierActive = !this.magnifierActive;
-          magnifierBtn.classList.toggle('active', this.magnifierActive);
-          magnifierBtn.classList.remove('pressing');
-          progressRing.style.animation = '';
-          feedbackText.style.opacity = '0';
-          feedbackText.style.transform = 'translateX(-50%) translateY(-10px)';
-          
-          // Show success message
-          feedbackText.textContent = this.magnifierActive ? '✓ تم التفعيل!' : '✓ تم الإيقاف!';
-          feedbackText.style.opacity = '1';
-          setTimeout(() => {
-            feedbackText.style.opacity = '0';
-          }, 1500);
-          
-          if (window.magicBento) {
-            window.magicBento.toggleMagnifier(this.magnifierActive);
-          }
-          
-          // Haptic feedback
-          if (navigator.vibrate) {
-            navigator.vibrate([50, 30, 50]);
-          }
-        }, longPressDuration);
-      };
-      
-      const cancelPress = () => {
-        if (pressTimer) {
-          clearTimeout(pressTimer);
-          pressTimer = null;
+        // Toggle magnifier in MagicBento instance
+        if (this.magicBento && this.magicBento.toggleMagnifier) {
+          this.magicBento.toggleMagnifier(this.magnifierActive);
         }
-        magnifierBtn.classList.remove('pressing');
-        progressRing.style.animation = '';
-        feedbackText.style.opacity = '0';
-        feedbackText.style.transform = 'translateX(-50%) translateY(-10px)';
-      };
-      
-      // Mouse events
-      magnifierBtn.addEventListener('mousedown', startPress);
-      magnifierBtn.addEventListener('mouseup', cancelPress);
-      magnifierBtn.addEventListener('mouseleave', cancelPress);
-      
-      // Touch events
-      magnifierBtn.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        startPress();
+        
+        // Haptic feedback on mobile
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
       });
-      magnifierBtn.addEventListener('touchend', cancelPress);
-      magnifierBtn.addEventListener('touchcancel', cancelPress);
+      
+      // Store update function for language changes
+      this.updateMagnifierButtonTitle = updateButtonTitle;
     }
     
     // Color Presets
@@ -411,6 +367,20 @@ class MagicBentoCustomizer {
     elements.forEach(element => {
       element.textContent = element.getAttribute(`data-${lang}`);
     });
+    
+    // Update magnifier button title
+    const magnifierBtn = document.querySelector('#magnifierToggle');
+    if (magnifierBtn) {
+      const titleAttr = lang === 'ar' ? 'data-ar-title' : 'data-en-title';
+      const baseTitle = magnifierBtn.getAttribute(titleAttr) || '';
+      
+      // Update title based on current state
+      if (this.magnifierActive) {
+        magnifierBtn.setAttribute('title', lang === 'ar' ? 'إيقاف العدسة المكبرة' : 'Deactivate Magnifier Lens');
+      } else {
+        magnifierBtn.setAttribute('title', baseTitle);
+      }
+    }
   }
 }
 

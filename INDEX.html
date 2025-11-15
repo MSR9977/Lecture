@@ -1,5 +1,5 @@
 1   ض46تِ<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
 
                 <!-- Dropdown: الإطارات -->
                 <div class="dropdown">
-                    <a href="#frameworks" data-ar="الإطارات" data-en="Frameworks">الإطارات</a>
+                    <a href="#" data-ar="الإطارات" data-en="Frameworks">الإطارات</a>
                     <ul class="dropdown-menu">
                         <li><a href="react.html" data-ar="React" data-en="React">React</a></li>
                         <li><a href="#node" data-ar="Node" data-en="Node">Node</a></li>
@@ -53,7 +53,7 @@
 
                 <!-- Dropdown: التنسيق المتقدم -->
                 <div class="dropdown">
-                    <a href="css-advanced.html" data-ar="التنسيق المتقدم" data-en="Advanced CSS">التنسيق المتقدم</a>
+                    <a href="#" data-ar="التنسيق المتقدم" data-en="Advanced CSS">التنسيق المتقدم</a>
                     <ul class="dropdown-menu">
                         <li><a href="tailwind.html" data-ar="Tailwind CSS" data-en="Tailwind CSS">Tailwind CSS</a></li>
                         <li><a href="bootstrap.html" data-ar="Bootstrap" data-en="Bootstrap">Bootstrap</a></li>
@@ -89,7 +89,7 @@
                 <div class="instructor-details">
                     <h1 class="instructor-name" data-ar="محاضرة قبول وظيفة العمل" data-en="Job Acceptance Lecture">محاضرة قبول وظيفة العمل</h1>
                     <div class="instructor-title">
-                        <h2 data-ar="المحاضر: مهندس محمد سعود الرميحي" data-en="Instructor: Engineer Mohammed Saud Al-Rumaihi">المحاضر: مهندس محمد سعود الرميحي</h2>
+                        <h2 data-ar="المحاضر: مهندس محمد سعود الرميحي" data-en="Instructor: Engineer Mohammed Saud Al-Romaihi">المحاضر: مهندس محمد سعود الرميحي</h2>
                     </div>
                     <div class="instructor-credentials">
                         <div class="credential-item">
@@ -778,13 +778,31 @@ if (englishBtn) {
             // Initialize Customizer
             const customizer = new MagicBentoCustomizer('magicBentoCustomizer', magicBento);
             
-            // Update language when toggled
+            // Update language when toggled and on page load
             const originalLangManager = window.LanguageManager;
             if (originalLangManager) {
+                // Get initial language from localStorage or default to 'en'
+                const initialLang = localStorage.getItem('preferredLanguage') || 'en';
+                
+                // Update components with initial language
+                setTimeout(() => {
+                    if (magicBento && magicBento.updateLanguage) {
+                        magicBento.updateLanguage(initialLang);
+                    }
+                    if (customizer && customizer.updateLanguage) {
+                        customizer.updateLanguage(initialLang);
+                    }
+                    if (examplesCards && examplesCards.updateLanguage) {
+                        examplesCards.updateLanguage(initialLang);
+                    }
+                }, 100);
+                
+                // Listen for language changes
                 const langToggle = document.getElementById('langToggle');
                 langToggle?.addEventListener('click', function() {
                     setTimeout(() => {
-                        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                        const currentLang = localStorage.getItem('preferredLanguage') || 
+                                          document.documentElement.getAttribute('lang') || 'en';
                         if (magicBento && magicBento.updateLanguage) {
                             magicBento.updateLanguage(currentLang);
                         }

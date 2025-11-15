@@ -496,8 +496,9 @@ class MagicBento {
     this.gridElement = document.createElement('div');
     this.gridElement.className = 'card-grid bento-section';
     
-    // Get current language
-    const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+    // Get current language from localStorage or default to 'en'
+    const currentLang = localStorage.getItem('preferredLanguage') || 
+                       document.documentElement.getAttribute('lang') || 'en';
     
     // Create cards
     cardData.forEach((card, index) => {
@@ -1029,7 +1030,8 @@ class MagicBento {
     
     // Helper function to get current language
     const getCurrentLanguage = () => {
-      return document.documentElement.getAttribute('lang') || 'ar';
+      return localStorage.getItem('preferredLanguage') || 
+             document.documentElement.getAttribute('lang') || 'en';
     };
     
     // Translation texts

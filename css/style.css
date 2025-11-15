@@ -158,6 +158,8 @@ textarea[id*="code"],
     transition: transform 0.3s ease;
 }
 
+/* Rotate arrow when dropdown is active */
+.dropdown.active > a::after,
 .dropdown:hover > a::after {
     transform: rotate(180deg);
 }
@@ -186,10 +188,25 @@ textarea[id*="code"],
     margin: 0;
 }
 
-.dropdown:hover .dropdown-menu {
+/* Dropdown active state (click-based) */
+.dropdown.active .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+/* Hover only on devices that actually support hover (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+  }
+
+  /* rotate arrow on hover for hoverable devices (optional) */
+  .dropdown:hover > a::after {
+      transform: rotate(180deg);
+  }
 }
 
 .dropdown-menu li {
@@ -219,13 +236,22 @@ textarea[id*="code"],
     animation: slideIn 0.3s ease forwards;
 }
 
+/* Animation delays for dropdown items */
+.dropdown.active .dropdown-menu li:nth-child(1),
 .dropdown:hover .dropdown-menu li:nth-child(1) { animation-delay: 0.05s; }
+.dropdown.active .dropdown-menu li:nth-child(2),
 .dropdown:hover .dropdown-menu li:nth-child(2) { animation-delay: 0.1s; }
+.dropdown.active .dropdown-menu li:nth-child(3),
 .dropdown:hover .dropdown-menu li:nth-child(3) { animation-delay: 0.15s; }
+.dropdown.active .dropdown-menu li:nth-child(4),
 .dropdown:hover .dropdown-menu li:nth-child(4) { animation-delay: 0.2s; }
+.dropdown.active .dropdown-menu li:nth-child(5),
 .dropdown:hover .dropdown-menu li:nth-child(5) { animation-delay: 0.25s; }
+.dropdown.active .dropdown-menu li:nth-child(6),
 .dropdown:hover .dropdown-menu li:nth-child(6) { animation-delay: 0.3s; }
+.dropdown.active .dropdown-menu li:nth-child(7),
 .dropdown:hover .dropdown-menu li:nth-child(7) { animation-delay: 0.35s; }
+.dropdown.active .dropdown-menu li:nth-child(8),
 .dropdown:hover .dropdown-menu li:nth-child(8) { animation-delay: 0.4s; }
 
 @keyframes slideIn {
@@ -1244,8 +1270,32 @@ textarea[id*="code"],
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .nav-container {
+        padding: 1rem 1rem;
+        gap: 0.5rem;
+    }
+    
+    .language-toggle {
+        margin-left: 0.5rem;
+    }
+    
+    .lang-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        gap: 4px;
+    }
+    
+    .lang-btn i {
+        font-size: 0.9rem;
+    }
+    
+    .lang-btn span {
+        font-size: 0.85rem;
+    }
+    
     .hamburger-menu {
         display: flex;
+        margin-left: 0.25rem;
     }
     
     .nav-menu {
@@ -1299,6 +1349,7 @@ textarea[id*="code"],
         transition: max-height 0.3s ease;
     }
     
+    .dropdown.active .dropdown-menu,
     .dropdown:hover .dropdown-menu {
         max-height: 500px;
     }
@@ -1969,6 +2020,38 @@ html {
 
 /* Small mobile devices */
 @media (max-width: 480px) {
+    .nav-container {
+        padding: 0.75rem 0.75rem;
+        gap: 0.25rem;
+    }
+    
+    .language-toggle {
+        margin-left: 0.25rem;
+    }
+    
+    .lang-btn {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.8rem;
+        gap: 3px;
+    }
+    
+    .lang-btn i {
+        font-size: 0.85rem;
+    }
+    
+    .lang-btn span {
+        font-size: 0.8rem;
+    }
+    
+    .hamburger-menu {
+        margin-left: 0.15rem;
+        padding: 0.4rem;
+    }
+    
+    .hamburger-menu span {
+        width: 22px;
+        height: 2.5px;
+    }
     .section h2 {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;

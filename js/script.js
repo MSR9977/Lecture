@@ -29,17 +29,118 @@ class HamburgerMenu {
     }
 }
 
-// Language Toggle Functionality
+// Dropdown Menu Toggle Functionality
+class DropdownMenu {
+    constructor() {
+        this.dropdowns = document.querySelectorAll('.dropdown');
+        // initial detection: true إذا الجهاز يدعم hover (desktop)
+        this.isHoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        this.init();
+        // إعادة التهيئة لو تغير حجم الشاشة / تغير خصائص الإدخال
+        window.addEventListener('resize', () => this.handleResize());
+    }
+
+    init() {
+        // تأكد أن أي ربط سابق تم ازالته لو كان هناك إعادة تهيئة
+        this.dropdowns.forEach(dropdown => {
+            const dropdownLink = dropdown.querySelector('a');
+
+            // إزالة أي مستمعين قد يكونون مُضافين مسبقاً (safety)
+            if (dropdownLink && dropdownLink._dropdownClickHandler) {
+                dropdownLink.removeEventListener('click', dropdownLink._dropdownClickHandler);
+                delete dropdownLink._dropdownClickHandler;
+            }
+
+            if (dropdownLink) {
+                // ربط الحدث مع التحقق داخل المعالج
+                const handler = (e) => {
+                    // إذا الجهاز يدعم hover (desktop) فلا نتعامل مع click كـ toggle
+                    // (يمكنك تغيير هذا لو تريد أن click يعمل أيضاً كfallback على desktop)
+                    if (this.isHoverable) {
+                        return; // اترك الـ hover (CSS) يفعل عمله على الشاشات الكبيرة
+                    }
+                    // للأجهزة بدون hover (هاتف/تابلت): منع التنقل الافتراضي وفتح/إغلاق بالقيمة .active
+                    e.preventDefault();
+                    this.toggleDropdown(dropdown);
+                };
+                dropdownLink.addEventListener('click', handler);
+                // خزّن المرجع لتتمكن من إزالته لاحقاً
+                dropdownLink._dropdownClickHandler = handler;
+
+                // accessibility: اضف aria-expanded الافتراضية
+                dropdownLink.setAttribute('aria-haspopup', 'true');
+                dropdownLink.setAttribute('aria-expanded', dropdown.classList.contains('active') ? 'true' : 'false');
+            }
+        });
+
+        // إغلاق القوائم عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                this.closeAllDropdowns();
+            }
+        }, true);
+    }
+
+    handleResize() {
+        const nowHoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (nowHoverable !== this.isHoverable) {
+            this.isHoverable = nowHoverable;
+            // إعادة تهيئة الوصول لربط/فكّ الأحداث حسب الحاجة
+            this.init();
+        }
+    }
+
+    toggleDropdown(dropdown) {
+        const dropdownLink = dropdown.querySelector('a');
+        const isActive = dropdown.classList.contains('active');
+
+        // أغلق الكل أولاً
+        this.closeAllDropdowns();
+
+        if (!isActive) {
+            dropdown.classList.add('active');
+            if (dropdownLink) dropdownLink.setAttribute('aria-expanded', 'true');
+        } else {
+            dropdown.classList.remove('active');
+            if (dropdownLink) dropdownLink.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    closeAllDropdowns() {
+        this.dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+            const link = dropdown.querySelector('a');
+            if (link) link.setAttribute('aria-expanded', 'false');
+        });
+    }
+}
+
+// Language Toggle Functionality with localStorage
 class LanguageManager {
     constructor() {
-        this.currentLang = 'ar';
+        // Load saved language or default to English
+        this.currentLang = this.loadLanguage();
         this.init();
+    }
+
+    // Load language from localStorage or return default 'en'
+    loadLanguage() {
+        const savedLang = localStorage.getItem('preferredLanguage');
+        return savedLang || 'en'; // Default to English
+    }
+
+    // Save language to localStorage
+    saveLanguage(lang) {
+        localStorage.setItem('preferredLanguage', lang);
     }
 
     init() {
         this.langToggle = document.getElementById('langToggle');
         this.bindEvents();
+        // Apply saved language immediately
+        this.updateDirection();
         this.updateContent();
+        this.updateToggleButton();
     }
 
     bindEvents() {
@@ -50,6 +151,8 @@ class LanguageManager {
 
     toggleLanguage() {
         this.currentLang = this.currentLang === 'ar' ? 'en' : 'ar';
+        // Save to localStorage
+        this.saveLanguage(this.currentLang);
         this.updateContent();
         this.updateDirection();
         this.updateToggleButton();
@@ -819,6 +922,7 @@ const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera
 document.addEventListener('DOMContentLoaded', () => {
     // Essential components - load immediately
     new HamburgerMenu();
+    new DropdownMenu();
     new LanguageManager();
     new SmoothScroll();
     new NavbarScrollEffect();

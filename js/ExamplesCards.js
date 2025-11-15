@@ -353,7 +353,9 @@ function updateDisplay() {
     const container = document.getElementById('examplesContainer');
     if (!container) return;
     
-    const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+    // Get language from localStorage or default to 'en'
+    const currentLang = localStorage.getItem('preferredLanguage') || 
+                       document.documentElement.getAttribute('lang') || 'en';
     
     this.examples.forEach(example => {
       const card = document.createElement('div');

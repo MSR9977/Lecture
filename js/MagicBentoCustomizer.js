@@ -239,7 +239,8 @@ class MagicBentoCustomizer {
     if (magnifierBtn) {
       // Update button title based on current language
       const updateButtonTitle = () => {
-        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+        const currentLang = localStorage.getItem('preferredLanguage') || 
+                           document.documentElement.getAttribute('lang') || 'en';
         const titleAttr = currentLang === 'ar' ? 'data-ar-title' : 'data-en-title';
         const title = magnifierBtn.getAttribute(titleAttr) || '';
         magnifierBtn.setAttribute('title', title);
@@ -254,7 +255,8 @@ class MagicBentoCustomizer {
         magnifierBtn.classList.toggle('active', this.magnifierActive);
         
         // Update title based on state and language
-        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+        const currentLang = localStorage.getItem('preferredLanguage') || 
+                           document.documentElement.getAttribute('lang') || 'en';
         if (this.magnifierActive) {
           magnifierBtn.setAttribute('title', currentLang === 'ar' ? 'إيقاف العدسة المكبرة' : 'Deactivate Magnifier Lens');
         } else {
@@ -312,8 +314,9 @@ class MagicBentoCustomizer {
       container.innerHTML = '';
       this.magicBento = new MagicBento('magicBentoContainer', this.settings);
       
-      // Update language if needed
-      const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+      // Update language if needed - get from localStorage or default to 'en'
+      const currentLang = localStorage.getItem('preferredLanguage') || 
+                         document.documentElement.getAttribute('lang') || 'en';
       setTimeout(() => {
         this.magicBento.updateLanguage(currentLang);
         
@@ -378,7 +381,7 @@ class MagicBentoCustomizer {
       if (this.magnifierActive) {
         magnifierBtn.setAttribute('title', lang === 'ar' ? 'إيقاف العدسة المكبرة' : 'Deactivate Magnifier Lens');
       } else {
-        magnifierBtn.setAttribute('title', baseTitle);
+        magnifierBtn.setAttribute('title', baseTitle || (lang === 'ar' ? 'تفعيل العدسة المكبرة' : 'Activate Magnifier Lens'));
       }
     }
   }

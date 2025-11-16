@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/MagicBento.css">
+    <link rel="stylesheet" href="./css/MagicBentoCustomizer.css">
+    <link rel="stylesheet" href="./css/ExamplesCards.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <h1 class="title">
+        typescript page
+     </h1>
+
+        <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-code"></i>
+                <span data-ar="أكاديمية البرمجة" data-en="Programming Academy">أكاديمية البرمجة</span>
+            </div>
+            <div class="nav-menu">
+                <!-- المقدمة -->
+                <a href="#intro" data-ar="المقدمة" data-en="Introduction">المقدمة</a>
+                
+                <!-- تطبيقات الويب -->
+                <a href="web-development.html" data-ar="تطبيقات الويب" data-en="Web Apps">تطبيقات الويب</a>
+                
+                <!-- تطبيقات الهاتف -->
+                <a href="mobile-development.html" data-ar="تطبيقات الهاتف" data-en="Phone Apps">تطبيقات الهاتف</a>
+                
+                <!-- الذكاء الاصطناعي وعلم البيانات -->
+                <a href="ai-datascience.html" data-ar="الذكاء الاصطناعي وعلم البيانات" data-en="AI & Data Science">الذكاء الاصطناعي وعلم البيانات</a>
+
+                <!-- Dropdown: الإطارات -->
+                <div class="dropdown">
+                    <a href="#frameworks" data-ar="الإطارات" data-en="Frameworks">الإطارات</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="react.html" data-ar="React" data-en="React">React</a></li>
+                        <li><a href="#node" data-ar="Node" data-en="Node">Node</a></li>
+                        <li><a href="typescript.html" data-ar="TypeScript" data-en="TypeScript">TypeScript</a></li>
+                        <li><a href="python.html" data-ar="Python" data-en="Python">Python</a></li>
+                        <li><a href="dart.html" data-ar="Dart & Flutter" data-en="Dart & Flutter">Dart & Flutter</a></li>
+                        <li><a href="swift.html" data-ar="Swift" data-en="Swift">Swift</a></li>
+                        <li><a href="kotlin.html" data-ar="Kotlin" data-en="Kotlin">Kotlin</a></li>
+                        <li><a href="go.html" data-ar="Go" data-en="Go">Go</a></li>
+                    </ul>
+                </div>
+
+                <!-- Dropdown: التنسيق المتقدم -->
+                <div class="dropdown">
+                    <a href="css-advanced.html" data-ar="التنسيق المتقدم" data-en="Advanced CSS">التنسيق المتقدم</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tailwind.html" data-ar="Tailwind CSS" data-en="Tailwind CSS">Tailwind CSS</a></li>
+                        <li><a href="bootstrap.html" data-ar="Bootstrap" data-en="Bootstrap">Bootstrap</a></li>
+                        <li><a href="bulma.html" data-ar="Bulma" data-en="Bulma">Bulma</a></li>
+                        <li><a href="material.html" data-ar="Materialize" data-en="Materialize">Materialize</a></li>
+                        <li><a href="motion.html" data-ar="Motion" data-en="Motion">Motion</a></li>
+                        <li><a href="flexbox.html" data-ar="Flexbox" data-en="Flexbox">Flexbox</a></li>
+                        <li><a href="grid.html" data-ar="Grid" data-en="Grid">Grid</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="language-toggle">
+                <button id="langToggle" class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                </button>
+            </div>
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+      <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div style="flex: 1;">
+                <h1 class="text-5xl font-bold data-ar="TypeScript " data-en="TypeScript">typescript  </h1>
+                <p data-ar="جافا سكربت - تايب سكربت " data-en="javascript - typescript">javascript - typescript</p>
+            </div>
+            <div class="hero-animation">
+                <div class="code-block">
+                    <!-- WRITE FOR ME A tYPESCRIPT INSTALLATION COMMAND WITH TAILWIND CSS AND VITE -->
+                    <div class="code-line">npm create react-app my-app --template typescript --tailwind</div>
+                    <div class="code-line">cd my-app</div>
+                    <div class="code-line">npm install</div>
+                    <div class="code-line">npm run dev</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section class="section">
+        <div class="container">
+            <h2 data-ar="التقنيات والأدوات" data-en="Technologies & Tools">التقنيات والأدوات</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <i class="fas fa-mobile-alt" style="color: #02569B;"></i>
+                    <h3>Dart</h3>
+                    <p data-ar="لغة برمجة حديثة وقوية لبناء تطبيقات الهاتف المحمول" data-en="Modern and powerful programming language for building mobile applications">لغة برمجة حديثة وقوية لبناء تطبيقات الهاتف المحمول</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-layer-group" style="color: #02569B;"></i>
+                    <h3>Flutter</h3>
+                    <p data-ar="إطار عمل متطور لبناء تطبيقات محمولة جميلة عبر المنصات" data-en="Advanced framework for building beautiful cross-platform mobile applications">إطار عمل متطور لبناء تطبيقات محمولة جميلة عبر المنصات</p>
+                </div>
+                <div class="content-card">
+                    <i class="fab fa-android" style="color: #3DDC84;"></i>
+                    <h3>Android</h3>
+                    <p data-ar="تطوير تطبيقات Android الأصلية بأداء عالي" data-en="Developing native Android applications with high performance">تطوير تطبيقات Android الأصلية بأداء عالي</p>
+                </div>
+                <div class="content-card">
+                    <i class="fab fa-apple" style="color: #000000;"></i>
+                    <h3>iOS</h3>
+                    <p data-ar="بناء تطبيقات iOS متميزة تتبع معايير Apple" data-en="Building excellent iOS applications following Apple standards">بناء تطبيقات iOS متميزة تتبع معايير Apple</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-database"></i>
+                    <h3 data-ar="قواعد البيانات المحلية" data-en="Local Databases">قواعد البيانات المحلية</h3>
+                    <p data-ar="استخدام SQLite و Hive لتخزين البيانات محلياً" data-en="Using SQLite and Hive for local data storage">استخدام SQLite و Hive لتخزين البيانات محلياً</p>
+                </div>
+                <div class="content-card">
+                    <i class="fas fa-plug"></i>
+                    <h3 data-ar="التكامل مع APIs" data-en="API Integration">التكامل مع APIs</h3>
+                    <p data-ar="ربط التطبيقات بالخدمات السحابية والـ APIs" data-en="Connecting applications with cloud services and APIs">ربط التطبيقات بالخدمات السحابية والـ APIs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/MagicBento.js"></script>
+    <script src="./js/MagicBentoCustomizer.js"></script>
+    <script src="./js/ExamplesCards.js"></script>
+    <script>
+        // Initialize Magic Bento with Customizer
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Examples Cards
+            const examplesCards = new ExamplesCards();
+            // Initialize MagicBento
+            const magicBento = new MagicBento('magicBentoContainer', {
+                textAutoHide: true,
+                enableStars: true,
+                enableSpotlight: true,
+                enableBorderGlow: true,
+                enableTilt: false,
+                enableMagnetism: true,
+                clickEffect: true,
+                spotlightRadius: 300,
+                particleCount: 12,
+                glowColor: '132, 0, 255'
+            });
+            
+            // Initialize Customizer
+            const customizer = new MagicBentoCustomizer('magicBentoCustomizer', magicBento);
+            
+            // Update language when toggled
+            const originalLangManager = window.LanguageManager;
+            if (originalLangManager) {
+                const langToggle = document.getElementById('langToggle');
+                langToggle?.addEventListener('click', function() {
+                    setTimeout(() => {
+                        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                        if (magicBento && magicBento.updateLanguage) {
+                            magicBento.updateLanguage(currentLang);
+                        }
+                        if (customizer && customizer.updateLanguage) {
+                            customizer.updateLanguage(currentLang);
+                        }
+                        if (examplesCards && examplesCards.updateLanguage) {
+                            examplesCards.updateLanguage(currentLang);
+                        }
+                    }, 100);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

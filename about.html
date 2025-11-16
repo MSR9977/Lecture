@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عني - About Me | محمد سعود الرميحي</title>
+    <meta http-equiv="refresh" content="0; url=./about-lanyard/about.html">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #271E37 0%, #060010 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .loading-container {
+            text-align: center;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+        }
+        
+        p {
+            color: rgba(255,255,255,0.7);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <h1>جاري التحميل...</h1>
+        <p>Loading Interactive Card...</p>
+    </div>
+    
+    <script>
+        // Redirect immediately
+        window.location.href = './about-lanyard/about.html';
+    </script>
+</body>
+</html>

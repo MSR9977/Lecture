@@ -6,10 +6,33 @@ import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphe
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import * as THREE from 'three';
 
-// Import your photo
+// Import your photo and logo
 import cardImage from '../assets/my-pic.png';
+import logoImage from '../assets/android-chrome-512x512.png';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
+
+// Helper function to create text canvas
+function createTextCanvas(text, color, fontSize, fontWeight) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+  
+  // Clear canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Set text style
+  ctx.font = `${fontWeight} ${fontSize}px Arial, sans-serif`;
+  ctx.fillStyle = color;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  
+  // Draw text
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+  
+  return canvas;
+}
 
 export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true }) {
   return (
@@ -81,6 +104,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
   
   // Load textures
   const cardTexture = useTexture(cardImage);
+  const logoTexture = useTexture(logoImage);
   
   const [curve] = useState(
     () => new THREE.CatmullRomCurve3([
@@ -175,10 +199,10 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
           {...segmentProps} 
           type={dragged ? 'kinematicPosition' : 'dynamic'}
         >
-          <CuboidCollider args={[0.8, 1.125, 0.01]} />
+          <CuboidCollider args={[0.7, 1.0, 0.01]} />
           <group
-            scale={2.25}
-            position={[0, -1.2, -0.05]}
+            scale={2.0}
+            position={[0, -1.1, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
             onPointerUp={e => (e.target.releasePointerCapture(e.pointerId), drag(false))}
@@ -187,24 +211,81 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
             )}
           >
-            {/* Card Front with Photo */}
-            <mesh position={[0, 0, 0.01]}>
+            {/* Card Front */}
+            <group position={[0, 0, 0.011]}>
+              {/* Photo Section - Upper part */}
+              <mesh position={[0, 0.35, 0]}>
+                <planeGeometry args={[1.5, 1.4]} />
+                <meshStandardMaterial 
+                  map={cardTexture}
+                  metalness={0.3}
+                  roughness={0.7}
+                />
+              </mesh>
+              
+              {/* Name and Title Section - Lower part */}
+              <mesh position={[0, -0.6, 0]}>
+                <planeGeometry args={[1.5, 0.8]} />
+                <meshStandardMaterial 
+                  color="#ffffff"
+                  metalness={0.2}
+                  roughness={0.8}
+                />
+              </mesh>
+              
+              {/* Text: Name */}
+              <mesh position={[0, -0.45, 0.001]}>
+                <planeGeometry args={[1.4, 0.2]} />
+                <meshBasicMaterial>
+                  <canvasTexture attach="map" image={createTextCanvas('Mohammed Saud Al-Rumaihi', '#1e3c72', 24, 'bold')} />
+                </meshBasicMaterial>
+              </mesh>
+              
+              {/* Text: Title */}
+              <mesh position={[0, -0.7, 0.001]}>
+                <planeGeometry args={[1.4, 0.15]} />
+                <meshBasicMaterial>
+                  <canvasTexture attach="map" image={createTextCanvas('Software Engineer', '#667eea', 18, 'normal')} />
+                </meshBasicMaterial>
+              </mesh>
+              
+              {/* Divider Line */}
+              <mesh position={[0, -0.25, 0.001]}>
+                <planeGeometry args={[1.3, 0.01]} />
+                <meshBasicMaterial color="#667eea" />
+              </mesh>
+            </group>
+            
+            {/* Card Back with Logo */}
+            <group position={[0, 0, -0.011]}>
+              <mesh>
+                <planeGeometry args={[1.6, 2.25]} />
+                <meshStandardMaterial 
+                  color="#1e3c72"
+                  metalness={0.5}
+                  roughness={0.5}
+                />
+              </mesh>
+              
+              {/* Logo on back */}
+              <mesh position={[0, 0, 0.001]}>
+                <planeGeometry args={[0.8, 0.8]} />
+                <meshStandardMaterial 
+                  map={logoTexture}
+                  transparent={true}
+                  metalness={0.3}
+                  roughness={0.7}
+                />
+              </mesh>
+            </group>
+            
+            {/* Card Frame/Base */}
+            <mesh position={[0, 0, 0]}>
               <boxGeometry args={[1.6, 2.25, 0.02]} />
               <meshStandardMaterial 
-                map={cardTexture}
+                color="#ffffff"
                 metalness={0.3}
                 roughness={0.7}
-                side={THREE.DoubleSide}
-              />
-            </mesh>
-            
-            {/* Card Back */}
-            <mesh position={[0, 0, -0.01]}>
-              <boxGeometry args={[1.6, 2.25, 0.02]} />
-              <meshStandardMaterial 
-                color="#1e3c72"
-                metalness={0.5}
-                roughness={0.5}
               />
             </mesh>
             

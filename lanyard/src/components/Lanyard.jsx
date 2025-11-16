@@ -12,21 +12,31 @@ import logoImage from '../assets/android-chrome-512x512.png';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-// Helper function to create text canvas
+// Helper function to create text canvas with better quality
 function createTextCanvas(text, color, fontSize, fontWeight) {
   const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 128;
+  canvas.width = 2048;  // Much higher resolution
+  canvas.height = 512;
   const ctx = canvas.getContext('2d');
+  
+  // Enable better rendering
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
   
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  // Set text style
-  ctx.font = `${fontWeight} ${fontSize}px Arial, sans-serif`;
+  // Set text style with better font
+  ctx.font = `${fontWeight} ${fontSize * 4}px 'Arial', sans-serif`;  // 4x size for clarity
   ctx.fillStyle = color;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
+  
+  // Add text shadow for better visibility
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+  ctx.shadowBlur = 8;
+  ctx.shadowOffsetX = 2;
+  ctx.shadowOffsetY = 2;
   
   // Draw text
   ctx.fillText(text, canvas.width / 2, canvas.height / 2);
@@ -178,6 +188,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
     }
   });
 
+  // eslint-disable-next-line react-hooks/immutability
   curve.curveType = 'chordal';
 
   return (
@@ -213,79 +224,78 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
           >
             {/* Card Front */}
             <group position={[0, 0, 0.011]}>
-              {/* Photo Section - Upper part */}
-              <mesh position={[0, 0.35, 0]}>
-                <planeGeometry args={[1.5, 1.4]} />
+              {/* Photo Section - Upper part with brightness filter */}
+              <mesh position={[0, 0.25, 0]}>
+                <planeGeometry args={[0.85, 1.2]} />
                 <meshStandardMaterial 
                   map={cardTexture}
-                  metalness={0.3}
-                  roughness={0.7}
+                  metalness={0.2}
+                  roughness={0.8}
+                  color="#888888"  // Darken the photo
                 />
               </mesh>
               
-              {/* Name and Title Section - Lower part */}
-              <mesh position={[0, -0.6, 0]}>
-                <planeGeometry args={[1.5, 0.8]} />
+              {/* Text: Name (white, clear) */}
+              <mesh position={[0, -0.55, 0.001]}>
+                <planeGeometry args={[1.4, 0.25]} />
+                <meshBasicMaterial transparent={true}>
+                  <canvasTexture attach="map" image={createTextCanvas('Mohammed Saud', '#ffffff', 32, 'bold')} />
+                </meshBasicMaterial>
+              </mesh>
+              
+              {/* Text: Last Name (white, clear) */}
+              <mesh position={[0, -0.78, 0.001]}>
+                <planeGeometry args={[1.4, 0.2]} />
+                <meshBasicMaterial transparent={true}>
+                  <canvasTexture attach="map" image={createTextCanvas('Al-Rumaihi', '#ffffff', 28, 'bold')} />
+                </meshBasicMaterial>
+              </mesh>
+              
+              {/* Text: Title (white, clear) */}
+              <mesh position={[0, -0.98, 0.001]}>
+                <planeGeometry args={[1.4, 0.18]} />
+                <meshBasicMaterial transparent={true}>
+                  <canvasTexture attach="map" image={createTextCanvas('Software Engineer', '#ffffff', 24, '600')} />
+                </meshBasicMaterial>
+              </mesh>
+              
+              {/* Divider Line (cyan) */}
+              <mesh position={[0, -0.42, 0.001]}>
+                <planeGeometry args={[1.3, 0.015]} />
+                <meshBasicMaterial color="#00d4ff" />
+              </mesh>
+            </group>
+            
+            {/* Card Back with Logo (gradient dark) */}
+            <group position={[0, 0, -0.011]} rotation={[0, Math.PI, 0]}>
+              <mesh>
+                <planeGeometry args={[1.6, 2.25]} />
                 <meshStandardMaterial 
-                  color="#ffffff"
+                  color="#9e9e9e"
+                  metalness={0.6}
+                  roughness={0.4}
+                />
+              </mesh>
+              
+              {/* Logo on back - bigger and centered */}
+              <mesh position={[0, 0, 0.001]}>
+                <planeGeometry args={[1.2, 1.2]} />
+                <meshStandardMaterial 
+                  map={logoTexture}
+                  transparent={true}
                   metalness={0.2}
                   roughness={0.8}
                 />
               </mesh>
-              
-              {/* Text: Name */}
-              <mesh position={[0, -0.45, 0.001]}>
-                <planeGeometry args={[1.4, 0.2]} />
-                <meshBasicMaterial>
-                  <canvasTexture attach="map" image={createTextCanvas('Mohammed Saud Al-Rumaihi', '#1e3c72', 24, 'bold')} />
-                </meshBasicMaterial>
-              </mesh>
-              
-              {/* Text: Title */}
-              <mesh position={[0, -0.7, 0.001]}>
-                <planeGeometry args={[1.4, 0.15]} />
-                <meshBasicMaterial>
-                  <canvasTexture attach="map" image={createTextCanvas('Software Engineer', '#667eea', 18, 'normal')} />
-                </meshBasicMaterial>
-              </mesh>
-              
-              {/* Divider Line */}
-              <mesh position={[0, -0.25, 0.001]}>
-                <planeGeometry args={[1.3, 0.01]} />
-                <meshBasicMaterial color="#667eea" />
-              </mesh>
             </group>
             
-            {/* Card Back with Logo */}
-            <group position={[0, 0, -0.011]}>
-              <mesh>
-                <planeGeometry args={[1.6, 2.25]} />
-                <meshStandardMaterial 
-                  color="#1e3c72"
-                  metalness={0.5}
-                  roughness={0.5}
-                />
-              </mesh>
-              
-              {/* Logo on back */}
-              <mesh position={[0, 0, 0.001]}>
-                <planeGeometry args={[0.8, 0.8]} />
-                <meshStandardMaterial 
-                  map={logoTexture}
-                  transparent={true}
-                  metalness={0.3}
-                  roughness={0.7}
-                />
-              </mesh>
-            </group>
-            
-            {/* Card Frame/Base */}
+            {/* Card Frame/Base (unified dark background) */}
             <mesh position={[0, 0, 0]}>
               <boxGeometry args={[1.6, 2.25, 0.02]} />
               <meshStandardMaterial 
-                color="#ffffff"
-                metalness={0.3}
-                roughness={0.7}
+                color="#212121"
+                metalness={0.4}
+                roughness={0.6}
               />
             </mesh>
             
